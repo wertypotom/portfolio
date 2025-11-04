@@ -1,0 +1,10 @@
+---
+description: Ensure keyboard navigation, ARIA labels, contrast ratios, and reduced motion options.
+globs: *
+alwaysApply: true
+---
+
+# Your rule content
+
+- The rule description goes here
+- You can use markdown but don't have to

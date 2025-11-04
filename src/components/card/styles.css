@@ -1,0 +1,16 @@
+.app-card {
+  border-radius: var(--radius);
+  padding: 24px;
+  background: #fff;
+  color: #111722;
+  box-shadow: var(--shadow);
+  transition: transform 0.25s ease;
+}
+
+.app-card--sm {
+  padding: 18px;
+}
+
+.app-card--lg {
+  padding: 28px;
+}

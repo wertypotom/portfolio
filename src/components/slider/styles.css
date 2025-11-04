@@ -1,0 +1,18 @@
+.app-slider {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  gap: 40px;
+  overflow-x: auto;
+  padding: 12px 0;
+  scrollbar-width: thin;
+}
+
+.app-slider::-webkit-scrollbar {
+  height: 6px;
+}
+
+.app-slider::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+}

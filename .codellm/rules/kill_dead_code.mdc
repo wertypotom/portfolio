@@ -1,0 +1,10 @@
+---
+description: Detect and remove unused code, flags, and endpoints; keep the codebase lean.
+globs: *
+alwaysApply: true
+---
+
+# Your rule content
+
+- The rule description goes here
+- You can use markdown but don't have to

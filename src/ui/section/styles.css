@@ -1,0 +1,10 @@
+.ui-section {
+  padding: clamp(72px, 10vw, 112px) 0;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.ui-section__inner {
+  width: 100%;
+}

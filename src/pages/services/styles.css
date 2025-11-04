@@ -1,0 +1,33 @@
+.page-services__section {
+  padding-top: clamp(70px, 10vw, 120px);
+}
+
+.page-services__heading {
+  text-align: center;
+  font-size: clamp(32px, 4vw, 40px);
+  margin: 0 0 36px;
+}
+
+.page-services__grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.page-services__card {
+  display: grid;
+  gap: 12px;
+  min-height: 220px;
+}
+
+.page-services__card-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.page-services__card-text {
+  margin: 0;
+  color: #2d3747;
+  line-height: 1.6;
+}

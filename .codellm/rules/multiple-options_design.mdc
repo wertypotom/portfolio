@@ -1,0 +1,10 @@
+---
+description: Propose 2–3 design approaches, compare trade-offs, and justify the chosen path.
+globs: *
+alwaysApply: true
+---
+
+# Your rule content
+
+- The rule description goes here
+- You can use markdown but don't have to

@@ -1,0 +1,10 @@
+---
+description: Confirm input validation, secret use, dependency scan, and data protection per PR.
+globs: *
+alwaysApply: true
+---
+
+# Your rule content
+
+- The rule description goes here
+- You can use markdown but don't have to

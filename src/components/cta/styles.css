@@ -1,0 +1,28 @@
+.app-cta {
+  padding: clamp(64px, 10vw, 96px) 0;
+  background: linear-gradient(
+    90deg,
+    rgba(124, 92, 255, 0.15),
+    rgba(14, 198, 178, 0.15)
+  );
+}
+
+.app-cta__container {
+  display: grid;
+  gap: 18px;
+  justify-items: center;
+  text-align: center;
+}
+
+.app-cta__title {
+  font-size: clamp(28px, 4vw, 40px);
+  margin: 0;
+}
+
+.app-cta__button {
+  padding: 12px 22px;
+  background: var(--secondary);
+  color: #082a27;
+  border-radius: 999px;
+  font-weight: 700;
+}

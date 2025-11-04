@@ -1,0 +1,10 @@
+---
+description: Keep modules/classes/functions focused on one responsibility with minimal side effects.
+globs: *
+alwaysApply: true
+---
+
+# Your rule content
+
+- The rule description goes here
+- You can use markdown but don't have to

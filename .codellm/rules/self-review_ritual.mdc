@@ -1,0 +1,10 @@
+---
+description: The agent must run a pre-PR checklist for naming, edge cases, errors, tests, deps, perf, and docs.
+globs: *
+alwaysApply: true
+---
+
+# Your rule content
+
+- The rule description goes here
+- You can use markdown but don't have to
