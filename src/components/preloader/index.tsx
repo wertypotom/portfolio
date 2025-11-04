@@ -1,26 +1,27 @@
-import { motion, AnimatePresence } from 'framer-motion'
-import './styles.css'
+import React from 'react'
+import { motion } from 'framer-motion'
 
-type Props = {
-  show: boolean
-}
-export default function Preloader({ show }: Props) {
+const Preloader: React.FC = () => {
   return (
-    <AnimatePresence>
-      {show && (
-        <motion.div
-          className='app-preloader'
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <motion.span
-            className='app-preloader__circle'
-            animate={{ rotate: 360 }}
-            transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}
-          />
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <motion.div
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className='fixed inset-0 bg-white flex items-center justify-center z-50'
+    >
+      <motion.div
+        animate={{
+          scale: [1, 1.2, 1],
+          rotate: [0, 360],
+        }}
+        transition={{
+          duration: 1.5,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+        className='w-16 h-16 border-4 border-orange-500 border-t-transparent rounded-full'
+      />
+    </motion.div>
   )
 }
+
+export default Preloader

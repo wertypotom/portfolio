@@ -1,94 +1,109 @@
+import React from 'react'
 import { motion } from 'framer-motion'
-import { FiArrowUpRight } from 'react-icons/fi'
-import Section from '../../ui/section'
-import Container from '../../ui/container'
-import Card from '../../components/card'
-import './styles.css'
+import { ArrowRight } from 'lucide-react'
 
-import portfolio1 from '../../assets/images/portfolio-1.jpg'
-import portfolio2 from '../../assets/images/portfolio-2.jpg'
-import portfolio3 from '../../assets/images/portfolio-3.jpg'
-import portfolio4 from '../../assets/images/portfolio-4.jpg'
+const Portfolio: React.FC = () => {
+  const projects = [
+    {
+      image: '/assets/images/portfolio-1.jpg',
+      category: 'Web Design',
+      title: 'Website Design for Marketing Agency Startup',
+      description:
+        'I design and develop services for customers of all sizes, specializing in creating stylish, modern websites, web services and online stores',
+    },
+    {
+      image: '/assets/images/portfolio-2.jpg',
+      category: 'Web Design',
+      title: 'Website Design for Marketing Agency Startup',
+      description:
+        'I design and develop services for customers of all sizes, specializing in creating stylish, modern websites, web services and online stores',
+    },
+    {
+      image: '/assets/images/portfolio-3.jpg',
+      category: 'Web Design',
+      title: 'Website Design for Marketing Agency Startup',
+      description:
+        'I design and develop services for customers of all sizes, specializing in creating stylish, modern websites, web services and online stores',
+    },
+    {
+      image: '/assets/images/portfolio-4.jpg',
+      category: 'Web Design',
+      title: 'Website Design for Marketing Agency Startup',
+      description:
+        'I design and develop services for customers of all sizes, specializing in creating stylish, modern websites, web services and online stores',
+    },
+  ]
 
-const projects = [
-  {
-    title: 'Website Design for Marketing Agency Startup',
-    category: 'Web Design',
-    description:
-      'I design and develop services for customers of all sizes, specializing in creating stylish, modern websites, web services and online stores.',
-    image: portfolio1,
-  },
-  {
-    title: 'Creative Landing Page Exploration',
-    category: 'Web Design',
-    description:
-      'A bold visual language and fluid layout crafted to help a SaaS startup raise their next round with confidence.',
-    image: portfolio2,
-  },
-  {
-    title: 'Ecommerce Experience Redesign',
-    category: 'Product Design',
-    description:
-      'Design system, UX strategy, and high-converting UI for a DTC brand expanding into new markets across the globe.',
-    image: portfolio3,
-  },
-  {
-    title: 'Fintech Dashboard Concept',
-    category: 'UI/UX',
-    description:
-      'Interactive dashboard with real-time analytics and collaboration features tailored for fast-scaling fintech teams.',
-    image: portfolio4,
-  },
-]
-
-export default function Portfolio() {
   return (
     <motion.main
-      className='page-portfolio'
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className='pt-24'
     >
-      <article>
-        <Section className='page-portfolio__section'>
-          <Container>
-            <h2 className='page-portfolio__heading'>Latest Projects</h2>
-            <ul className='page-portfolio__grid'>
-              {projects.map((project) => (
-                <motion.li
-                  key={project.title}
-                  className='page-portfolio__item'
-                  initial={{ opacity: 0, y: 32 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-80px' }}
-                  transition={{ duration: 0.4 }}
-                >
-                  <Card size='lg' className='page-portfolio__card'>
-                    <figure className='page-portfolio__banner'>
-                      <img src={project.image} alt={project.title} />
-                      <a className='page-portfolio__icon-btn' href='#'>
-                        <FiArrowUpRight />
-                      </a>
-                    </figure>
-                    <div className='page-portfolio__content'>
-                      <span className='page-portfolio__chip'>
-                        {project.category}
-                      </span>
-                      <h3 className='page-portfolio__title'>{project.title}</h3>
-                      <p className='page-portfolio__text'>
-                        {project.description}
-                      </p>
-                      <a className='page-portfolio__link' href='#'>
-                        View Project
-                      </a>
-                    </div>
-                  </Card>
-                </motion.li>
-              ))}
-            </ul>
-          </Container>
-        </Section>
-      </article>
+      <section className='py-20 px-4'>
+        <div className='container mx-auto'>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className='text-5xl font-bold text-center text-gray-900 mb-16'
+          >
+            Latest Projects
+          </motion.h2>
+
+          <div className='grid md:grid-cols-2 gap-12'>
+            {projects.map((project, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.2 }}
+                whileHover={{ y: -10 }}
+                className='bg-white rounded-2xl shadow-xl overflow-hidden group'
+              >
+                <div className='relative overflow-hidden'>
+                  <motion.img
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.4 }}
+                    src={project.image}
+                    alt={project.title}
+                    className='w-full h-64 object-cover'
+                  />
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    className='absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center'
+                  >
+                    <motion.button
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      className='bg-white text-gray-900 p-4 rounded-full'
+                    >
+                      <ArrowRight size={24} />
+                    </motion.button>
+                  </motion.div>
+                </div>
+
+                <div className='p-8'>
+                  <span className='inline-block bg-orange-100 text-orange-600 px-4 py-1 rounded-full text-sm font-semibold mb-4'>
+                    {project.category}
+                  </span>
+                  <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+                    {project.title}
+                  </h3>
+                  <p className='text-gray-600 mb-6'>{project.description}</p>
+                  <button className='bg-orange-500 text-white px-6 py-2 rounded-full hover:bg-orange-600 transition-colors'>
+                    View Project
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
     </motion.main>
   )
 }
+
+export default Portfolio

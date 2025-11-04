@@ -1,144 +1,184 @@
-import { type FormEvent } from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { FiPhone, FiMail, FiMapPin } from 'react-icons/fi'
-import Section from '../../ui/section'
-import Container from '../../ui/container'
-import Button from '../../ui/button'
-import './styles.css'
+import { Phone, Mail, MapPin } from 'lucide-react'
 
-import contactBg from '../../assets/images/contact-bg.png'
+const Contact: React.FC = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  })
 
-const contactItems = [
-  {
-    label: 'Phone',
-    value: '+01 123 654 8096',
-    href: 'tel:+011236548096',
-    color: 'hsl(177, 39%, 72%)',
-    icon: <FiPhone />,
-  },
-  {
-    label: 'Mail',
-    value: 'info@domainname.com',
-    href: 'mailto:info@domainname.com',
-    color: 'hsl(41, 99%, 64%)',
-    icon: <FiMail />,
-  },
-  {
-    label: 'Visit My Studio',
-    value: 'Warnwe Park Streetperrine,\nFL 33157 New York City',
-    href: undefined,
-    color: 'hsl(19, 97%, 85%)',
-    icon: <FiMapPin />,
-  },
-]
-
-export default function Contact() {
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    // hook up to backend or email service
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log('Form submitted:', formData)
   }
+
+  const contactInfo = [
+    {
+      icon: Phone,
+      title: 'Phone',
+      value: '+01 123 654 8096',
+      href: 'tel:+011236548096',
+      color: 'bg-teal-300',
+    },
+    {
+      icon: Mail,
+      title: 'Mail',
+      value: 'info@domainname.com',
+      href: 'mailto:info@domainname.com',
+      color: 'bg-yellow-300',
+    },
+    {
+      icon: MapPin,
+      title: 'Visit My Studio',
+      value: 'Warnwe Park Streetperrine, FL 33157 New York City',
+      href: '#',
+      color: 'bg-orange-200',
+    },
+  ]
 
   return (
     <motion.main
-      className='page-contact'
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className='pt-24'
     >
-      <article>
-        <Section className='page-contact__section' bgImage={contactBg}>
-          <Container className='page-contact__container'>
-            <motion.form
-              className='page-contact__form'
-              onSubmit={handleSubmit}
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45 }}
+      <section className='py-20 px-4 min-h-screen bg-gradient-to-br from-orange-50 to-white'>
+        <div className='container mx-auto'>
+          <div className='grid md:grid-cols-2 gap-12'>
+            {/* Contact Form */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
             >
-              <h2 className='page-contact__form-title'>Get in touch</h2>
-              <p className='page-contact__form-text'>
+              <h2 className='text-4xl font-bold text-gray-900 mb-4'>
+                Get in touch
+              </h2>
+              <p className='text-gray-600 mb-8'>
                 Our friendly team would love to hear from you.
               </p>
 
-              <div className='page-contact__row'>
-                <label className='page-contact__field'>
-                  <span>First name</span>
+              <form onSubmit={handleSubmit} className='space-y-6'>
+                <div className='grid md:grid-cols-2 gap-6'>
+                  <div>
+                    <label className='block text-gray-700 font-medium mb-2'>
+                      First name
+                    </label>
+                    <input
+                      type='text'
+                      placeholder='Name *'
+                      required
+                      className='w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all'
+                      value={formData.name}
+                      onChange={(e) =>
+                        setFormData({ ...formData, name: e.target.value })
+                      }
+                    />
+                  </div>
+                  <div>
+                    <label className='block text-gray-700 font-medium mb-2'>
+                      Your Email
+                    </label>
+                    <input
+                      type='email'
+                      placeholder='Email *'
+                      required
+                      className='w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all'
+                      value={formData.email}
+                      onChange={(e) =>
+                        setFormData({ ...formData, email: e.target.value })
+                      }
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className='block text-gray-700 font-medium mb-2'>
+                    Subject
+                  </label>
                   <input
                     type='text'
-                    name='firstName'
-                    placeholder='Name *'
-                    required
+                    placeholder='Subject *'
+                    className='w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all'
+                    value={formData.subject}
+                    onChange={(e) =>
+                      setFormData({ ...formData, subject: e.target.value })
+                    }
                   />
-                </label>
+                </div>
 
-                <label className='page-contact__field'>
-                  <span>Your email</span>
-                  <input
-                    type='email'
-                    name='email'
-                    placeholder='Email *'
+                <div>
+                  <label className='block text-gray-700 font-medium mb-2'>
+                    Your message
+                  </label>
+                  <textarea
+                    placeholder='Your message *'
                     required
+                    rows={6}
+                    className='w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all resize-none'
+                    value={formData.message}
+                    onChange={(e) =>
+                      setFormData({ ...formData, message: e.target.value })
+                    }
                   />
-                </label>
-              </div>
+                </div>
 
-              <label className='page-contact__field'>
-                <span>Subject</span>
-                <input type='text' name='subject' placeholder='Subject *' />
-              </label>
-
-              <label className='page-contact__field'>
-                <span>Your message</span>
-                <textarea
-                  name='message'
-                  placeholder='Your message *'
-                  rows={4}
-                  required
-                />
-              </label>
-
-              <div className='page-contact__actions'>
-                <Button type='submit' variant='tertiary'>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  type='submit'
+                  className='bg-orange-500 text-white px-8 py-3 rounded-full hover:bg-orange-600 transition-colors font-semibold'
+                >
                   Send Message
-                </Button>
-              </div>
-            </motion.form>
-
-            <motion.div
-              className='page-contact__info'
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: 0.1 }}
-            >
-              <ul className='page-contact__list'>
-                {contactItems.map((item) => (
-                  <li key={item.label} className='page-contact__item'>
-                    <span
-                      className='page-contact__icon'
-                      style={{ backgroundColor: item.color }}
-                    >
-                      {item.icon}
-                    </span>
-
-                    <div>
-                      <p className='page-contact__label'>{item.label}</p>
-                      {item.href ? (
-                        <a className='page-contact__value' href={item.href}>
-                          {item.value}
-                        </a>
-                      ) : (
-                        <address className='page-contact__value'>
-                          {item.value}
-                        </address>
-                      )}
-                    </div>
-                  </li>
-                ))}
-              </ul>
+                </motion.button>
+              </form>
             </motion.div>
-          </Container>
-        </Section>
-      </article>
+
+            {/* Contact Info */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className='space-y-6'
+            >
+              {contactInfo.map((info, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.2 }}
+                  whileHover={{ scale: 1.05 }}
+                  className='flex items-start space-x-4'
+                >
+                  <div
+                    className={`${info.color} p-4 rounded-2xl flex-shrink-0`}
+                  >
+                    <info.icon size={32} className='text-gray-800' />
+                  </div>
+                  <div>
+                    <p className='text-lg font-semibold text-gray-900 mb-1'>
+                      {info.title}
+                    </p>
+                    <a
+                      href={info.href}
+                      className='text-gray-600 hover:text-orange-500 transition-colors'
+                    >
+                      {info.value}
+                    </a>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </section>
     </motion.main>
   )
 }
+
+export default Contact

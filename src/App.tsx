@@ -1,14 +1,55 @@
-import { Header } from './components/header'
-import { Footer } from './components/footer'
-import { AppRoutes } from './routes'
+import React, { useState, useEffect } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
+import { motion, AnimatePresence } from 'framer-motion'
+import Home from './pages/home'
+import Services from './pages/services'
+import Portfolio from './pages/portfolio'
+import Contact from './pages/contact'
+import Header from './components/header'
+import Footer from './components/footer'
+import Preloader from './components/preloader'
 
-function App() {
+const App: React.FC = () => {
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 2000)
+    return () => clearTimeout(timer)
+  }, [])
+
   return (
-    <>
-      <Header />
-      <AppRoutes />
-      <Footer />
-    </>
+    <AnimatePresence mode='wait'>
+      {loading ? (
+        <Preloader key='preloader' />
+      ) : (
+        <motion.div
+          key='app'
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className='min-h-screen bg-white'
+        >
+          <Header />
+          <AnimatedRoutes />
+          <Footer />
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}
+
+const AnimatedRoutes: React.FC = () => {
+  const location = useLocation()
+
+  return (
+    <AnimatePresence mode='wait'>
+      <Routes location={location} key={location.pathname}>
+        <Route path='/' element={<Home />} />
+        <Route path='/services' element={<Services />} />
+        <Route path='/portfolio' element={<Portfolio />} />
+        <Route path='/contact' element={<Contact />} />
+      </Routes>
+    </AnimatePresence>
   )
 }
 
