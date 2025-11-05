@@ -14,109 +14,104 @@ import {
   X,
   ArrowDown,
 } from 'lucide-react'
+import { SkillsOrbitContainer } from '../../components/orbites'
+
+const skillCategories = [
+  {
+    name: 'Languages',
+    icon: Code2,
+    color: 'bg-blue-500',
+    technologies: ['JavaScript', 'TypeScript', 'SQL', 'NoSQL', 'HTML5', 'CSS3'],
+  },
+  {
+    name: 'Frontend',
+    icon: Palette,
+    color: 'bg-purple-500',
+    technologies: [
+      'React',
+      'Next.js',
+      'Redux',
+      'Overmind',
+      'MobX',
+      'Zustand',
+      'Effector',
+      'Styled Components',
+      'MUI',
+      'Ant Design',
+      'Tailwind',
+      'Sass',
+      'TanStack Query',
+    ],
+  },
+  {
+    name: 'Backend',
+    icon: Cpu,
+    color: 'bg-green-500',
+    technologies: ['Node.js', 'Express'],
+  },
+  {
+    name: 'Databases',
+    icon: Database,
+    color: 'bg-orange-500',
+    technologies: ['MySQL', 'PostgreSQL'],
+  },
+  {
+    name: 'Testing',
+    icon: TestTube,
+    color: 'bg-pink-500',
+    technologies: ['Jest', 'React Testing Library', 'Cypress', 'Playwright'],
+  },
+  {
+    name: 'DevOps & Cloud',
+    icon: Cloud,
+    color: 'bg-cyan-500',
+    technologies: [
+      'Vite',
+      'Webpack',
+      'Docker',
+      'CI/CD',
+      'ESLint',
+      'AWS (EC2, S3, CloudFront, VPC, Load Balancer, IAM, Monitoring)',
+    ],
+  },
+  {
+    name: 'Tools & Design',
+    icon: Wrench,
+    color: 'bg-yellow-500',
+    technologies: ['Git', 'GitHub', 'GitLab', 'Figma'],
+  },
+  {
+    name: 'AI',
+    icon: Brain,
+    color: 'bg-indigo-500',
+    technologies: ['ChatGPT', 'Claude', 'GitHub Copilot'],
+  },
+]
+
+const testimonials = [
+  {
+    image: '/assets/images/testi-1.jpg',
+    name: 'Jennifer Lutheran',
+    title: 'CEO at pxdraft',
+    text: "Dolor lorem is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+  },
+  {
+    image: '/assets/images/testi-2.jpg',
+    name: 'Michael Roberts',
+    title: 'CTO at TechCorp',
+    text: "Dolor lorem is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+  },
+  {
+    image: '/assets/images/testi-3.jpg',
+    name: 'Sarah Johnson',
+    title: 'Designer at Creative Co',
+    text: "Dolor lorem is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+  },
+]
 
 const Home: React.FC = () => {
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null)
-
-  const skillCategories = [
-    {
-      name: 'Languages',
-      icon: Code2,
-      color: 'bg-blue-500',
-      technologies: [
-        'JavaScript',
-        'TypeScript',
-        'SQL',
-        'NoSQL',
-        'HTML5',
-        'CSS3',
-      ],
-    },
-    {
-      name: 'Frontend',
-      icon: Palette,
-      color: 'bg-purple-500',
-      technologies: [
-        'React',
-        'Next.js',
-        'Redux',
-        'Overmind',
-        'MobX',
-        'Zustand',
-        'Effector',
-        'Styled Components',
-        'MUI',
-        'Ant Design',
-        'Tailwind',
-        'Sass',
-        'TanStack Query',
-      ],
-    },
-    {
-      name: 'Backend',
-      icon: Cpu,
-      color: 'bg-green-500',
-      technologies: ['Node.js', 'Express'],
-    },
-    {
-      name: 'Databases',
-      icon: Database,
-      color: 'bg-orange-500',
-      technologies: ['MySQL', 'PostgreSQL'],
-    },
-    {
-      name: 'Testing',
-      icon: TestTube,
-      color: 'bg-pink-500',
-      technologies: ['Jest', 'React Testing Library', 'Cypress', 'Playwright'],
-    },
-    {
-      name: 'DevOps & Cloud',
-      icon: Cloud,
-      color: 'bg-cyan-500',
-      technologies: [
-        'Vite',
-        'Webpack',
-        'Docker',
-        'CI/CD',
-        'ESLint',
-        'AWS (EC2, S3, CloudFront, VPC, Load Balancer, IAM, Monitoring)',
-      ],
-    },
-    {
-      name: 'Tools & Design',
-      icon: Wrench,
-      color: 'bg-yellow-500',
-      technologies: ['Git', 'GitHub', 'GitLab', 'Figma'],
-    },
-    {
-      name: 'AI',
-      icon: Brain,
-      color: 'bg-indigo-500',
-      technologies: ['ChatGPT', 'Claude', 'GitHub Copilot'],
-    },
-  ]
-
-  const testimonials = [
-    {
-      image: '/assets/images/testi-1.jpg',
-      name: 'Jennifer Lutheran',
-      title: 'CEO at pxdraft',
-      text: "Dolor lorem is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-    },
-    {
-      image: '/assets/images/testi-2.jpg',
-      name: 'Michael Roberts',
-      title: 'CTO at TechCorp',
-      text: "Dolor lorem is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-    },
-    {
-      image: '/assets/images/testi-3.jpg',
-      name: 'Sarah Johnson',
-      title: 'Designer at Creative Co',
-      text: "Dolor lorem is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-    },
-  ]
+  const [skillSearch, setSkillSearch] = useState('')
 
   const scrollToSkills = () => {
     const skillsSection = document.getElementById('skills-section')
@@ -269,6 +264,26 @@ const Home: React.FC = () => {
             My Skills
           </motion.h2>
 
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className='flex justify-center mt-10'
+          >
+            <input
+              type='text'
+              placeholder='Looking for specific skill ?'
+              value={skillSearch}
+              onChange={(e) => setSkillSearch(e.target.value)}
+              onFocus={(e) => (e.target.placeholder = '')}
+              onBlur={(e) =>
+                (e.target.placeholder = 'Looking for specific skill ?')
+              }
+              className='w-full max-w-md px-6 py-3 text-center bg-transparent border-2 border-orange-300 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:border-orange-500 transition-colors'
+            />
+          </motion.div>
+
           <div className='relative w-full max-w-6xl mx-auto flex justify-center items-center h-[500px] sm:h-[650px] md:h-[850px] lg:h-[950px]'>
             {/* Center Image - Much Bigger */}
             <motion.div
@@ -281,221 +296,14 @@ const Home: React.FC = () => {
               <img
                 src='/assets/images/skills-banner.png'
                 alt='Andrey Povstyanko'
-                className='w-72 h-72 sm:w-96 sm:h-96 md:w-[32rem] md:h-[32rem] lg:w-[40rem] lg:h-[40rem] object-cover'
+                className='w-72 h-72 sm:w-96 sm:h-96 md:w-lg md:h-128 lg:w-160 lg:h-160 object-cover'
               />
             </motion.div>
 
-            {/* Orbiting Container - Mobile */}
-            <motion.div
-              className='absolute z-10 left-1/2 top-1/2 sm:hidden'
-              animate={{ rotate: 360 }}
-              transition={{
-                duration: 60,
-                repeat: Infinity,
-                ease: 'linear',
-              }}
-            >
-              {skillCategories.map((skill, index) => {
-                const angle = (index / skillCategories.length) * 2 * Math.PI
-                const radius = 180
-                const x = Math.cos(angle) * radius
-                const y = Math.sin(angle) * radius
-                const Icon = skill.icon
-
-                return (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1, duration: 0.5 }}
-                    className='absolute'
-                    style={{
-                      left: `${x}px`,
-                      top: `${y}px`,
-                    }}
-                  >
-                    <motion.button
-                      whileHover={{ scale: 1.2 }}
-                      animate={{
-                        rotate: -360,
-                      }}
-                      transition={{
-                        rotate: {
-                          duration: 60,
-                          repeat: Infinity,
-                          ease: 'linear',
-                        },
-                      }}
-                      onClick={() => setSelectedSkill(skill.name)}
-                      className={`${skill.color} w-14 h-14 rounded-full shadow-lg flex items-center justify-center cursor-pointer hover:shadow-2xl transition-shadow -translate-x-1/2 -translate-y-1/2`}
-                      aria-label={`View ${skill.name} skills`}
-                    >
-                      <Icon className='text-white w-6 h-6' />
-                    </motion.button>
-                  </motion.div>
-                )
-              })}
-            </motion.div>
-
-            {/* Orbiting Container - Tablet (sm) */}
-            <motion.div
-              className='absolute z-10 left-1/2 top-1/2 hidden sm:block md:hidden'
-              animate={{ rotate: 360 }}
-              transition={{
-                duration: 60,
-                repeat: Infinity,
-                ease: 'linear',
-              }}
-            >
-              {skillCategories.map((skill, index) => {
-                const angle = (index / skillCategories.length) * 2 * Math.PI
-                const radius = 220
-                const x = Math.cos(angle) * radius
-                const y = Math.sin(angle) * radius
-                const Icon = skill.icon
-
-                return (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1, duration: 0.5 }}
-                    className='absolute'
-                    style={{
-                      left: `${x}px`,
-                      top: `${y}px`,
-                    }}
-                  >
-                    <motion.button
-                      whileHover={{ scale: 1.2 }}
-                      animate={{
-                        rotate: -360,
-                      }}
-                      transition={{
-                        rotate: {
-                          duration: 60,
-                          repeat: Infinity,
-                          ease: 'linear',
-                        },
-                      }}
-                      onClick={() => setSelectedSkill(skill.name)}
-                      className={`${skill.color} w-20 h-20 rounded-full shadow-lg flex items-center justify-center cursor-pointer hover:shadow-2xl transition-shadow -translate-x-1/2 -translate-y-1/2`}
-                      aria-label={`View ${skill.name} skills`}
-                    >
-                      <Icon className='text-white w-8 h-8' />
-                    </motion.button>
-                  </motion.div>
-                )
-              })}
-            </motion.div>
-
-            {/* Orbiting Container - Desktop (md) */}
-            <motion.div
-              className='absolute z-10 left-1/2 top-1/2 hidden md:block lg:hidden'
-              animate={{ rotate: 360 }}
-              transition={{
-                duration: 60,
-                repeat: Infinity,
-                ease: 'linear',
-              }}
-            >
-              {skillCategories.map((skill, index) => {
-                const angle = (index / skillCategories.length) * 2 * Math.PI
-                const radius = 300
-                const x = Math.cos(angle) * radius
-                const y = Math.sin(angle) * radius
-                const Icon = skill.icon
-
-                return (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1, duration: 0.5 }}
-                    className='absolute'
-                    style={{
-                      left: `${x}px`,
-                      top: `${y}px`,
-                    }}
-                  >
-                    <motion.button
-                      whileHover={{ scale: 1.2 }}
-                      animate={{
-                        rotate: -360,
-                      }}
-                      transition={{
-                        rotate: {
-                          duration: 60,
-                          repeat: Infinity,
-                          ease: 'linear',
-                        },
-                      }}
-                      onClick={() => setSelectedSkill(skill.name)}
-                      className={`${skill.color} w-24 h-24 rounded-full shadow-lg flex items-center justify-center cursor-pointer hover:shadow-2xl transition-shadow -translate-x-1/2 -translate-y-1/2`}
-                      aria-label={`View ${skill.name} skills`}
-                    >
-                      <Icon className='text-white w-9 h-9' />
-                    </motion.button>
-                  </motion.div>
-                )
-              })}
-            </motion.div>
-
-            {/* Orbiting Container - Large (lg) */}
-            <motion.div
-              className='absolute z-10 left-1/2 top-1/2 hidden lg:block'
-              animate={{ rotate: 360 }}
-              transition={{
-                duration: 60,
-                repeat: Infinity,
-                ease: 'linear',
-              }}
-            >
-              {skillCategories.map((skill, index) => {
-                const angle = (index / skillCategories.length) * 2 * Math.PI
-                const radius = 340
-                const x = Math.cos(angle) * radius
-                const y = Math.sin(angle) * radius
-                const Icon = skill.icon
-
-                return (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1, duration: 0.5 }}
-                    className='absolute'
-                    style={{
-                      left: `${x}px`,
-                      top: `${y}px`,
-                    }}
-                  >
-                    <motion.button
-                      whileHover={{ scale: 1.2 }}
-                      animate={{
-                        rotate: -360,
-                      }}
-                      transition={{
-                        rotate: {
-                          duration: 60,
-                          repeat: Infinity,
-                          ease: 'linear',
-                        },
-                      }}
-                      onClick={() => setSelectedSkill(skill.name)}
-                      className={`${skill.color} w-28 h-28 rounded-full shadow-lg flex items-center justify-center cursor-pointer hover:shadow-2xl transition-shadow -translate-x-1/2 -translate-y-1/2`}
-                      aria-label={`View ${skill.name} skills`}
-                    >
-                      <Icon className='text-white w-10 h-10' />
-                    </motion.button>
-                  </motion.div>
-                )
-              })}
-            </motion.div>
+            <SkillsOrbitContainer
+              skillCategories={skillCategories}
+              onSkillSelect={setSelectedSkill}
+            />
           </div>
         </div>
       </section>
