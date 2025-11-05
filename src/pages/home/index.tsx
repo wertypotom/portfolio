@@ -4,14 +4,6 @@ import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 
 const Home: React.FC = () => {
-  const clients = [
-    '/assets/images/client-1.svg',
-    '/assets/images/client-2.svg',
-    '/assets/images/client-3.svg',
-    '/assets/images/client-4.svg',
-    '/assets/images/client-5.svg',
-  ]
-
   const skills = [
     { name: 'HTML', color: 'bg-teal-300', icon: '🌐' },
     { name: 'CSS', color: 'bg-yellow-300', icon: '🎨' },
@@ -65,10 +57,18 @@ const Home: React.FC = () => {
       transition={{ duration: 0.5 }}
     >
       {/* Hero Section */}
-      <section className='relative pt-32 pb-20 px-4 overflow-hidden bg-gradient-to-br from-orange-50 to-white'>
-        <div className='absolute top-0 left-10 w-96 h-96 bg-orange-200 rounded-full opacity-30 blur-3xl -rotate-45' />
+      <section className='hero-section relative pt-32 pb-20 px-4 overflow-hidden bg-orange-50/40'>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: 'easeOut' }}
+          className='absolute top-[-10%] right-[-15%] w-[50%] h-[60%] bg-orange-300/40 -rotate-45 rounded-[20%]'
+          style={{
+            transformOrigin: 'center',
+          }}
+        />
 
-        <div className='container mx-auto'>
+        <div className='container mx-auto relative z-10'>
           <div className='grid md:grid-cols-2 gap-12 items-center'>
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -79,38 +79,58 @@ const Home: React.FC = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
-                className='text-gray-700 font-semibold tracking-wider mb-4'
+                className='text-orange-600 font-semibold tracking-wider mb-4 text-lg'
               >
-                👋, My name is Annie
+                👋 Hi, I'm Andrey Povstyanko
               </motion.p>
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className='text-5xl md:text-6xl font-bold text-gray-900 mb-6'
+                className='text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight'
               >
-                I'm a Developer
+                Senior Web Developer
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
-                className='text-xl text-gray-600 mb-8'
+                className='text-xl text-gray-700 mb-4 leading-relaxed'
               >
-                Based in Los Angeles, California.
+                5+ years building performant, intuitive web applications with{' '}
+                <span className='font-semibold text-orange-600'>
+                  React, Next.js & TypeScript
+                </span>
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.45 }}
+                className='text-lg text-gray-600 mb-8'
+              >
+                📍 Milwaukee, WI • Open to relocation across the US
               </motion.p>
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
+                className='flex flex-wrap gap-4'
               >
                 <Link
                   to='/contact'
-                  className='inline-flex items-center bg-orange-500 text-white px-8 py-3 rounded-full hover:bg-orange-600 transition-all hover:scale-105'
+                  className='inline-flex items-center bg-orange-500 text-white px-8 py-3 rounded-full hover:bg-orange-600 transition-all hover:scale-105 shadow-lg'
                 >
-                  Let's Start
+                  Let's Work Together
                   <ArrowRight className='ml-2' size={20} />
                 </Link>
+                <a
+                  href='/assets/resume.pdf'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='inline-flex items-center bg-white text-gray-800 px-8 py-3 rounded-full border-2 border-gray-300 hover:border-orange-500 hover:text-orange-600 transition-all hover:scale-105'
+                >
+                  View Resume
+                </a>
               </motion.div>
             </motion.div>
 
@@ -118,102 +138,13 @@ const Home: React.FC = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className='relative'
+              className='relative flex justify-center'
             >
               <img
-                src='/assets/images/hero-banner.png'
-                alt='Annie'
-                className='w-full max-w-lg mx-auto drop-shadow-2xl'
+                src='/assets/images/banner-me.png'
+                alt='Andrey Povstyanko'
+                className='w-full h-auto max-w-md lg:max-w-lg xl:max-w-xl mx-auto drop-shadow-2xl object-contain'
               />
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Clients Section */}
-      <section className='bg-gray-900 py-8'>
-        <div className='container mx-auto px-4'>
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className='flex overflow-x-auto space-x-12 justify-center items-center'
-          >
-            {clients.map((client, index) => (
-              <motion.img
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                src={client}
-                alt='Client'
-                className='h-10 opacity-70 hover:opacity-100 transition-opacity'
-              />
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section className='py-20 px-4'>
-        <div className='container mx-auto'>
-          <div className='grid md:grid-cols-2 gap-12 items-center'>
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <img
-                src='/assets/images/about-banner.png'
-                alt='About Annie'
-                className='w-full rounded-lg'
-              />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className='text-4xl font-bold text-gray-900 mb-6'>
-                I'm a Freelancer Front-end Developer with over 3 years of
-                experience.
-              </h2>
-              <p className='text-gray-600 mb-6'>
-                I'm a Freelancer Front-end Developer with over 3 years of
-                experience. I'm from San Francisco. I code and create web
-                elements for amazing people around the world. I like work with
-                new people. New people new Experiences.
-              </p>
-
-              <div className='flex space-x-8 mb-8'>
-                <div>
-                  <p className='text-3xl font-bold text-orange-500'>285+</p>
-                  <p className='text-gray-600'>Project Completed</p>
-                </div>
-                <div>
-                  <p className='text-3xl font-bold text-orange-500'>190+</p>
-                  <p className='text-gray-600'>Happy Clients</p>
-                </div>
-              </div>
-
-              <div className='flex flex-wrap gap-4'>
-                <Link
-                  to='/contact'
-                  className='bg-orange-500 text-white px-6 py-3 rounded-full hover:bg-orange-600 transition-colors'
-                >
-                  Contact Me
-                </Link>
-                <Link
-                  to='/portfolio'
-                  className='bg-gray-200 text-gray-800 px-6 py-3 rounded-full hover:bg-gray-300 transition-colors'
-                >
-                  Portfolio
-                </Link>
-              </div>
             </motion.div>
           </div>
         </div>

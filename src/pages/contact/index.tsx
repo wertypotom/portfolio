@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Phone, Mail, MapPin } from 'lucide-react'
+import { Phone, Mail, Github, Linkedin } from 'lucide-react'
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -18,24 +18,31 @@ const Contact: React.FC = () => {
   const contactInfo = [
     {
       icon: Phone,
-      title: 'Phone',
-      value: '+01 123 654 8096',
-      href: 'tel:+011236548096',
-      color: 'bg-teal-300',
+      title: 'Call me',
+      value: '+1 414 324 2621',
+      href: 'tel:+14143242521',
+      color: 'bg-gradient-to-br from-green-500 to-green-600',
     },
     {
       icon: Mail,
-      title: 'Mail',
-      value: 'info@domainname.com',
-      href: 'mailto:info@domainname.com',
-      color: 'bg-yellow-300',
+      title: 'Mail me',
+      value: 'andrey.povstyanko.00@gmail.com',
+      href: 'mailto:andrey.povstyanko.00@gmail.com',
+      color: 'bg-gradient-to-br from-orange-500 to-orange-600',
     },
     {
-      icon: MapPin,
-      title: 'Visit My Studio',
-      value: 'Warnwe Park Streetperrine, FL 33157 New York City',
-      href: '#',
-      color: 'bg-orange-200',
+      icon: Github,
+      title: 'Visit My Github',
+      href: 'https://github.com/wertypotom',
+      value: 'https://github.com/wertypotom',
+      color: 'bg-gradient-to-br from-gray-700 to-gray-800',
+    },
+    {
+      icon: Linkedin,
+      title: 'Check out my Linkedin page',
+      href: 'https://www.linkedin.com/in/andrey-povstyanko/',
+      value: 'https://www.linkedin.com/in/andrey-povstyanko/',
+      color: 'bg-gradient-to-br from-blue-600 to-blue-700',
     },
   ]
 
@@ -60,7 +67,7 @@ const Contact: React.FC = () => {
                 Get in touch
               </h2>
               <p className='text-gray-600 mb-8'>
-                Our friendly team would love to hear from you.
+                I would love to hear from you.
               </p>
 
               <form onSubmit={handleSubmit} className='space-y-6'>
@@ -88,7 +95,7 @@ const Contact: React.FC = () => {
                       type='email'
                       placeholder='Email *'
                       required
-                      className='w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all'
+                      className='w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all '
                       value={formData.email}
                       onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })
@@ -158,7 +165,7 @@ const Contact: React.FC = () => {
                   <div
                     className={`${info.color} p-4 rounded-2xl flex-shrink-0`}
                   >
-                    <info.icon size={32} className='text-gray-800' />
+                    <info.icon size={32} className='text-white' />
                   </div>
                   <div>
                     <p className='text-lg font-semibold text-gray-900 mb-1'>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, MessageCircleMore } from 'lucide-react'
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -33,8 +33,8 @@ const Header: React.FC = () => {
       }`}
     >
       <div className='container mx-auto px-4 py-4 flex items-center justify-between'>
-        <Link to='/' className='text-2xl font-semibold text-gray-800'>
-          <img src='/logo.svg' alt='Annie' className='h-7' />
+        <Link to='/' className='text-2xl font-semibold text-gray-800 -ml-6'>
+          <img src='/assets/images/logo-me.png' alt='Andrey' className='h-9' />
         </Link>
 
         {/* Desktop Navigation */}
@@ -61,10 +61,12 @@ const Header: React.FC = () => {
         </nav>
 
         <Link
-          to='/contact'
-          className='hidden md:block bg-orange-500 text-white px-6 py-2 rounded-full hover:bg-orange-600 transition-colors'
+          to="mailto:andrey.povstyanko.00@gmail.com?subject=🤘 Hi Andrey, I'd like to hire you"
+          className='hidden md:flex items-center gap-2 bg-orange-500 text-white px-6 py-2 rounded-full hover:bg-orange-600 transition-colors'
+          target='_blank'
         >
-          Contact Now
+          <MessageCircleMore size={20} className='text-white' />
+          Hire me
         </Link>
 
         {/* Mobile Menu Button */}

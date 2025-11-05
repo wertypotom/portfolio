@@ -1,13 +1,11 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react'
+import { Linkedin, Github } from 'lucide-react'
 
 const Footer: React.FC = () => {
   const socialLinks = [
-    { icon: Facebook, href: '#' },
-    { icon: Twitter, href: '#' },
-    { icon: Instagram, href: '#' },
     { icon: Linkedin, href: '#' },
+    { icon: Github, href: '#' },
   ]
 
   return (
@@ -34,9 +32,6 @@ const Footer: React.FC = () => {
             </motion.li>
           ))}
         </motion.ul>
-        <p className='text-center text-gray-400'>
-          &copy; 2024 copyright all right reserved
-        </p>
       </div>
     </footer>
   )
