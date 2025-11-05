@@ -12,6 +12,7 @@ import {
   Brain,
   Cpu,
   X,
+  ArrowDown,
 } from 'lucide-react'
 
 const Home: React.FC = () => {
@@ -117,6 +118,13 @@ const Home: React.FC = () => {
     },
   ]
 
+  const scrollToSkills = () => {
+    const skillsSection = document.getElementById('skills-section')
+    if (skillsSection) {
+      skillsSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
+
   return (
     <motion.main
       initial={{ opacity: 0 }}
@@ -215,22 +223,53 @@ const Home: React.FC = () => {
               />
             </motion.div>
           </div>
+
+          {/* My Skills Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 }}
+            className='flex justify-center mt-16'
+          >
+            <button
+              onClick={scrollToSkills}
+              className='inline-flex flex-col items-center gap-2 text-orange-600 hover:text-orange-700 transition-colors group'
+            >
+              <span className='text-lg font-semibold'>My Skills</span>
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+              >
+                <ArrowDown
+                  size={24}
+                  className='group-hover:scale-110 transition-transform'
+                />
+              </motion.div>
+            </button>
+          </motion.div>
         </div>
       </section>
 
       {/* Skills Section */}
-      <section className='py-10 sm:py-16 md:py-20 px-4 bg-gray-50 overflow-hidden'>
+      <section
+        id='skills-section'
+        className='py-10 sm:py-16 md:py-20 px-4 bg-orange-50/40 overflow-hidden'
+      >
         <div className='container mx-auto'>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className='text-3xl sm:text-4xl font-bold text-center text-gray-900 mb-8 sm:mb-12 md:mb-16'
+            className='text-3xl sm:text-4xl font-bold text-center text-gray-900 -mb-6 -sm:mb-8 -md:mb-10'
           >
             My Skills
           </motion.h2>
 
-          <div className='relative w-full max-w-6xl mx-auto flex justify-center items-center h-[550px] sm:h-[700px] md:h-[900px] lg:h-[1100px]'>
+          <div className='relative w-full max-w-6xl mx-auto flex justify-center items-center h-[500px] sm:h-[650px] md:h-[850px] lg:h-[950px]'>
             {/* Center Image - Much Bigger */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
