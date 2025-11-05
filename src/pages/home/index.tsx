@@ -1,16 +1,99 @@
-import React from 'react'
-import { motion } from 'framer-motion'
+import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowRight } from 'lucide-react'
+import {
+  ArrowRight,
+  Code2,
+  Database,
+  TestTube,
+  Cloud,
+  Wrench,
+  Palette,
+  Brain,
+  Cpu,
+  X,
+} from 'lucide-react'
 
 const Home: React.FC = () => {
-  const skills = [
-    { name: 'HTML', color: 'bg-teal-300', icon: '🌐' },
-    { name: 'CSS', color: 'bg-yellow-300', icon: '🎨' },
-    { name: 'React JS', color: 'bg-orange-200', icon: '⚛️' },
-    { name: 'Angular', color: 'bg-blue-300', icon: '🅰️' },
-    { name: 'iOS App', color: 'bg-green-300', icon: '🍎' },
-    { name: 'App Dev', color: 'bg-purple-200', icon: '📱' },
+  const [selectedSkill, setSelectedSkill] = useState<string | null>(null)
+
+  const skillCategories = [
+    {
+      name: 'Languages',
+      icon: Code2,
+      color: 'bg-blue-500',
+      technologies: [
+        'JavaScript',
+        'TypeScript',
+        'SQL',
+        'NoSQL',
+        'HTML5',
+        'CSS3',
+      ],
+    },
+    {
+      name: 'Frontend',
+      icon: Palette,
+      color: 'bg-purple-500',
+      technologies: [
+        'React',
+        'Next.js',
+        'Redux',
+        'Overmind',
+        'MobX',
+        'Zustand',
+        'Effector',
+        'Styled Components',
+        'MUI',
+        'Ant Design',
+        'Tailwind',
+        'Sass',
+        'TanStack Query',
+      ],
+    },
+    {
+      name: 'Backend',
+      icon: Cpu,
+      color: 'bg-green-500',
+      technologies: ['Node.js', 'Express'],
+    },
+    {
+      name: 'Databases',
+      icon: Database,
+      color: 'bg-orange-500',
+      technologies: ['MySQL', 'PostgreSQL'],
+    },
+    {
+      name: 'Testing',
+      icon: TestTube,
+      color: 'bg-pink-500',
+      technologies: ['Jest', 'React Testing Library', 'Cypress', 'Playwright'],
+    },
+    {
+      name: 'DevOps & Cloud',
+      icon: Cloud,
+      color: 'bg-cyan-500',
+      technologies: [
+        'Vite',
+        'Webpack',
+        'Docker',
+        'CI/CD',
+        'ESLint',
+        'AWS (EC2, S3, CloudFront, VPC, Load Balancer, IAM, Monitoring)',
+      ],
+    },
+    {
+      name: 'Tools & Design',
+      icon: Wrench,
+      color: 'bg-yellow-500',
+      technologies: ['Git', 'GitHub', 'GitLab', 'Figma'],
+    },
+    {
+      name: 'AI',
+      icon: Brain,
+      color: 'bg-indigo-500',
+      technologies: ['ChatGPT', 'Claude', 'GitHub Copilot'],
+    },
   ]
 
   const testimonials = [
@@ -33,21 +116,6 @@ const Home: React.FC = () => {
       text: "Dolor lorem is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
     },
   ]
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  }
 
   return (
     <motion.main
@@ -151,50 +219,312 @@ const Home: React.FC = () => {
       </section>
 
       {/* Skills Section */}
-      <section className='py-20 px-4 bg-gray-50'>
+      <section className='py-10 sm:py-16 md:py-20 px-4 bg-gray-50 overflow-hidden'>
         <div className='container mx-auto'>
-          <div className='grid md:grid-cols-2 gap-12 items-center'>
-            <motion.div
-              variants={containerVariants}
-              initial='hidden'
-              whileInView='visible'
-              viewport={{ once: true }}
-            >
-              <h2 className='text-4xl font-bold text-gray-900 mb-8'>
-                My Skills
-              </h2>
-              <div className='grid grid-cols-2 gap-4'>
-                {skills.map((skill, index) => (
-                  <motion.div
-                    key={index}
-                    variants={itemVariants}
-                    whileHover={{ scale: 1.05, rotate: 2 }}
-                    className={`${skill.color} p-6 rounded-2xl shadow-lg`}
-                  >
-                    <div className='text-4xl mb-3'>{skill.icon}</div>
-                    <h3 className='text-xl font-semibold text-gray-800'>
-                      {skill.name}
-                    </h3>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className='text-3xl sm:text-4xl font-bold text-center text-gray-900 mb-8 sm:mb-12 md:mb-16'
+          >
+            My Skills
+          </motion.h2>
 
+          <div className='relative w-full max-w-6xl mx-auto flex justify-center items-center h-[550px] sm:h-[700px] md:h-[900px] lg:h-[1100px]'>
+            {/* Center Image - Much Bigger */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
+              className='absolute z-20 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'
             >
               <img
-                src='/assets/images/skill-banner.png'
-                alt='Skills'
-                className='w-full'
+                src='/assets/images/skills-banner.png'
+                alt='Andrey Povstyanko'
+                className='w-72 h-72 sm:w-96 sm:h-96 md:w-[32rem] md:h-[32rem] lg:w-[40rem] lg:h-[40rem] object-cover'
               />
+            </motion.div>
+
+            {/* Orbiting Container - Mobile */}
+            <motion.div
+              className='absolute z-10 left-1/2 top-1/2 sm:hidden'
+              animate={{ rotate: 360 }}
+              transition={{
+                duration: 60,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+            >
+              {skillCategories.map((skill, index) => {
+                const angle = (index / skillCategories.length) * 2 * Math.PI
+                const radius = 180
+                const x = Math.cos(angle) * radius
+                const y = Math.sin(angle) * radius
+                const Icon = skill.icon
+
+                return (
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                    className='absolute'
+                    style={{
+                      left: `${x}px`,
+                      top: `${y}px`,
+                    }}
+                  >
+                    <motion.button
+                      whileHover={{ scale: 1.2 }}
+                      animate={{
+                        rotate: -360,
+                      }}
+                      transition={{
+                        rotate: {
+                          duration: 60,
+                          repeat: Infinity,
+                          ease: 'linear',
+                        },
+                      }}
+                      onClick={() => setSelectedSkill(skill.name)}
+                      className={`${skill.color} w-14 h-14 rounded-full shadow-lg flex items-center justify-center cursor-pointer hover:shadow-2xl transition-shadow -translate-x-1/2 -translate-y-1/2`}
+                      aria-label={`View ${skill.name} skills`}
+                    >
+                      <Icon className='text-white w-6 h-6' />
+                    </motion.button>
+                  </motion.div>
+                )
+              })}
+            </motion.div>
+
+            {/* Orbiting Container - Tablet (sm) */}
+            <motion.div
+              className='absolute z-10 left-1/2 top-1/2 hidden sm:block md:hidden'
+              animate={{ rotate: 360 }}
+              transition={{
+                duration: 60,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+            >
+              {skillCategories.map((skill, index) => {
+                const angle = (index / skillCategories.length) * 2 * Math.PI
+                const radius = 220
+                const x = Math.cos(angle) * radius
+                const y = Math.sin(angle) * radius
+                const Icon = skill.icon
+
+                return (
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                    className='absolute'
+                    style={{
+                      left: `${x}px`,
+                      top: `${y}px`,
+                    }}
+                  >
+                    <motion.button
+                      whileHover={{ scale: 1.2 }}
+                      animate={{
+                        rotate: -360,
+                      }}
+                      transition={{
+                        rotate: {
+                          duration: 60,
+                          repeat: Infinity,
+                          ease: 'linear',
+                        },
+                      }}
+                      onClick={() => setSelectedSkill(skill.name)}
+                      className={`${skill.color} w-20 h-20 rounded-full shadow-lg flex items-center justify-center cursor-pointer hover:shadow-2xl transition-shadow -translate-x-1/2 -translate-y-1/2`}
+                      aria-label={`View ${skill.name} skills`}
+                    >
+                      <Icon className='text-white w-8 h-8' />
+                    </motion.button>
+                  </motion.div>
+                )
+              })}
+            </motion.div>
+
+            {/* Orbiting Container - Desktop (md) */}
+            <motion.div
+              className='absolute z-10 left-1/2 top-1/2 hidden md:block lg:hidden'
+              animate={{ rotate: 360 }}
+              transition={{
+                duration: 60,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+            >
+              {skillCategories.map((skill, index) => {
+                const angle = (index / skillCategories.length) * 2 * Math.PI
+                const radius = 300
+                const x = Math.cos(angle) * radius
+                const y = Math.sin(angle) * radius
+                const Icon = skill.icon
+
+                return (
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                    className='absolute'
+                    style={{
+                      left: `${x}px`,
+                      top: `${y}px`,
+                    }}
+                  >
+                    <motion.button
+                      whileHover={{ scale: 1.2 }}
+                      animate={{
+                        rotate: -360,
+                      }}
+                      transition={{
+                        rotate: {
+                          duration: 60,
+                          repeat: Infinity,
+                          ease: 'linear',
+                        },
+                      }}
+                      onClick={() => setSelectedSkill(skill.name)}
+                      className={`${skill.color} w-24 h-24 rounded-full shadow-lg flex items-center justify-center cursor-pointer hover:shadow-2xl transition-shadow -translate-x-1/2 -translate-y-1/2`}
+                      aria-label={`View ${skill.name} skills`}
+                    >
+                      <Icon className='text-white w-9 h-9' />
+                    </motion.button>
+                  </motion.div>
+                )
+              })}
+            </motion.div>
+
+            {/* Orbiting Container - Large (lg) */}
+            <motion.div
+              className='absolute z-10 left-1/2 top-1/2 hidden lg:block'
+              animate={{ rotate: 360 }}
+              transition={{
+                duration: 60,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+            >
+              {skillCategories.map((skill, index) => {
+                const angle = (index / skillCategories.length) * 2 * Math.PI
+                const radius = 340
+                const x = Math.cos(angle) * radius
+                const y = Math.sin(angle) * radius
+                const Icon = skill.icon
+
+                return (
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                    className='absolute'
+                    style={{
+                      left: `${x}px`,
+                      top: `${y}px`,
+                    }}
+                  >
+                    <motion.button
+                      whileHover={{ scale: 1.2 }}
+                      animate={{
+                        rotate: -360,
+                      }}
+                      transition={{
+                        rotate: {
+                          duration: 60,
+                          repeat: Infinity,
+                          ease: 'linear',
+                        },
+                      }}
+                      onClick={() => setSelectedSkill(skill.name)}
+                      className={`${skill.color} w-28 h-28 rounded-full shadow-lg flex items-center justify-center cursor-pointer hover:shadow-2xl transition-shadow -translate-x-1/2 -translate-y-1/2`}
+                      aria-label={`View ${skill.name} skills`}
+                    >
+                      <Icon className='text-white w-10 h-10' />
+                    </motion.button>
+                  </motion.div>
+                )
+              })}
             </motion.div>
           </div>
         </div>
       </section>
+      {/* Modal */}
+      <AnimatePresence>
+        {selectedSkill && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className='fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4'
+            onClick={() => setSelectedSkill(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className='bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl relative max-h-[80vh] overflow-y-auto'
+            >
+              <button
+                onClick={() => setSelectedSkill(null)}
+                className='absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition-colors'
+                aria-label='Close modal'
+              >
+                <X size={24} />
+              </button>
+
+              {skillCategories.find((s) => s.name === selectedSkill) && (
+                <>
+                  <div className='flex items-center gap-4 mb-6'>
+                    {React.createElement(
+                      skillCategories.find((s) => s.name === selectedSkill)!
+                        .icon,
+                      {
+                        className: `${skillCategories
+                          .find((s) => s.name === selectedSkill)!
+                          .color.replace('bg-', 'text-')}`,
+                        size: 40,
+                      }
+                    )}
+                    <h3 className='text-2xl font-bold text-gray-900'>
+                      {selectedSkill}
+                    </h3>
+                  </div>
+
+                  <ul className='space-y-3'>
+                    {skillCategories
+                      .find((s) => s.name === selectedSkill)!
+                      .technologies.map((tech, idx) => (
+                        <motion.li
+                          key={idx}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: idx * 0.05 }}
+                          className='text-gray-700 flex items-start gap-3'
+                        >
+                          <span className='w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0'></span>
+                          <span>{tech}</span>
+                        </motion.li>
+                      ))}
+                  </ul>
+                </>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* CTA Section */}
       <section className='bg-gray-900 py-16 px-4'>
