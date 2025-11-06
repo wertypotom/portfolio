@@ -5,6 +5,7 @@ import Home from './pages/home'
 import Header from './components/header'
 import Footer from './components/footer'
 import Preloader from './components/preloader'
+import { MusicPlayer } from './components/music-player'
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(true)
@@ -27,6 +28,7 @@ const App: React.FC = () => {
           className='min-h-screen bg-white'
         >
           <Header />
+          <MusicPlayer />
           <AnimatedRoutes />
           <Footer />
         </motion.div>
