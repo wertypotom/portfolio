@@ -1,17 +1,10 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, ArrowDown } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 export const HeroSection = () => {
-  const scrollToSkills = () => {
-    const skillsSection = document.getElementById('skills-section')
-    if (skillsSection) {
-      skillsSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
-  }
-
   return (
-    <section className='hero-section relative pt-32 pb-20 px-4 overflow-hidden bg-orange-50/40'>
+    <section className='hero-section relative pt-32 pb-10 px-4 overflow-hidden bg-orange-50/40'>
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -101,34 +94,6 @@ export const HeroSection = () => {
             />
           </motion.div>
         </div>
-
-        {/* My Skills Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className='flex justify-center mt-16'
-        >
-          <button
-            onClick={scrollToSkills}
-            className='inline-flex flex-col items-center gap-2 text-orange-600 hover:text-orange-700 transition-colors group'
-          >
-            <span className='text-lg font-semibold'>My Skills</span>
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-            >
-              <ArrowDown
-                size={24}
-                className='group-hover:scale-110 transition-transform'
-              />
-            </motion.div>
-          </button>
-        </motion.div>
       </div>
     </section>
   )

@@ -18,6 +18,7 @@ import { SkillSearchModal } from '../../components/skill-search-modal'
 import { HeroSection } from './hero'
 import { CTA } from './cta'
 import { Recommendations } from './recommendations'
+import { WorkExperience } from './work-experience'
 
 const skillCategories = [
   {
@@ -135,7 +136,7 @@ const Home: React.FC = () => {
             whileInView={{ opacity: 1, scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className='w-8/10 h-1 bg-orange-500 mx-auto mb-8'
+            className='w-8/10 h-1 bg-orange-500 mx-auto mb-10'
           />
 
           <motion.h2
@@ -303,6 +304,9 @@ const Home: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Work experience section */}
+      <WorkExperience />
       {/* CTA Section */}
       <CTA />
       {/* Testimonials Section */}
