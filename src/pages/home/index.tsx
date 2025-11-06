@@ -110,6 +110,7 @@ const Home: React.FC = () => {
   const handleCloseModal = () => {
     cancelRequest()
     setIsSearchModalOpen(false)
+    setSkillSearch('')
   }
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -132,6 +133,17 @@ const Home: React.FC = () => {
         className='py-10 sm:py-16 md:py-20 px-4 bg-orange-50/40 overflow-hidden'
       >
         <div className='container mx-auto'>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className='text-xl text-gray-500 mb-4 leading-relaxed text-center mx-auto'
+          >
+            I also really enjoy listening to music. So while exploring my site,
+            I hope you'll enjoy my small playlist as well 😌
+          </motion.p>
+
           <motion.div
             initial={{ opacity: 0, scaleX: 0 }}
             whileInView={{ opacity: 1, scaleX: 1 }}
@@ -185,6 +197,7 @@ const Home: React.FC = () => {
                   (e.target.placeholder = 'Looking for specific skill I used ?')
                 }
                 className='w-full px-6 py-3 pr-12 text-center bg-transparent border-2 border-orange-500 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:border-orange-500 transition-colors'
+                disabled={isSearchModalOpen}
               />
               <button
                 onClick={handleSearch}
