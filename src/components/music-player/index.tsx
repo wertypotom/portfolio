@@ -10,9 +10,9 @@ interface Song {
 
 const playlist: Song[] = [
   {
-    title: `I Don't Wanna Live Forever (Fifty Shades Darker)`,
-    artist: 'Sara Farell',
-    url: `/assets/music/I Don't Wanna Live Forever (Fifty Shades Darker) - Acoustic Version - Sara Farell.mp3`,
+    title: `Wonderful Tonight`,
+    artist: 'Boyce Avenue',
+    url: `/assets/music/Wonderful Tonight - Boyce Avenue.mp3`,
   },
   {
     title: 'Rockabye',
