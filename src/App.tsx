@@ -43,7 +43,7 @@ const AnimatedRoutes: React.FC = () => {
     <AnimatePresence mode='wait'>
       <Routes location={location} key={location.pathname}>
         <Route path='/' element={<Home />} />
-        <Route path='/portfolio' element={<Portfolio />} />
+        {/* <Route path='/portfolio' element={<Portfolio />} /> */}
       </Routes>
     </AnimatePresence>
   )

@@ -81,7 +81,7 @@ export const WorkExperience: React.FC = () => {
           whileInView={{ opacity: 1, scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className='w-8/10 h-1 bg-orange-500 mx-auto mb-8 -mt-10'
+          className='w-8/10 h-1 bg-orange-500 mx-auto mb-10 -mt-16'
         />
 
         <motion.h2
