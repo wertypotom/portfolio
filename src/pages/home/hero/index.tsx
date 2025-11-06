@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom'
 
 export const HeroSection = () => {
   return (
-    <section className='hero-section relative pt-32 pb-10 px-4 overflow-hidden bg-orange-50/40'>
+    <section
+      id='hero'
+      className='hero-section relative pt-32 pb-10 px-4 overflow-hidden bg-orange-50/40'
+    >
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}

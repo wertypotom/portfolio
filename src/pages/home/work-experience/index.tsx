@@ -78,7 +78,7 @@ export const WorkExperience: React.FC = () => {
       id='work-experience'
       className='py-10 sm:py-16 md:py-20 px-4 bg-white'
     >
-      <div className='container mx-auto max-w-6xl'>
+      <div className='container mx-auto max-w-6xl py-15'>
         <motion.div
           initial={{ opacity: 0, scaleX: 0 }}
           whileInView={{ opacity: 1, scaleX: 1 }}

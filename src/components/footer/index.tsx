@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Linkedin, Github, Phone, Mail } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const Footer: React.FC = () => {
   const socialLinks = [
@@ -23,7 +24,10 @@ const Footer: React.FC = () => {
   ]
 
   return (
-    <footer className='bg-orange-50 text-gray-800 py-12 border-t-2 border-orange-200'>
+    <footer
+      id='contact'
+      className='bg-orange-50 text-gray-800 py-12 border-t-2 border-orange-200'
+    >
       <div className='container mx-auto px-4'>
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -45,12 +49,13 @@ const Footer: React.FC = () => {
               whileHover={{ scale: 1.2, rotate: 5 }}
               whileTap={{ scale: 0.9 }}
             >
-              <a
-                href={social.href}
+              <Link
+                target='_blank'
+                to={social.href}
                 className='w-12 h-12 bg-white border-2 border-orange-200 rounded-full flex items-center justify-center hover:bg-orange-500 hover:border-orange-500 hover:text-white hover:shadow-lg transition-all'
               >
                 <social.icon size={20} />
-              </a>
+              </Link>
             </motion.li>
           ))}
         </motion.ul>

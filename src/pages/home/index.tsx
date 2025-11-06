@@ -127,7 +127,7 @@ const Home: React.FC = () => {
       <HeroSection />
       {/* Skills Section */}
       <section
-        id='skills-section'
+        id='skills'
         className='py-10 sm:py-16 md:py-20 px-4 bg-orange-50/40 overflow-hidden'
       >
         <div className='container mx-auto'>
