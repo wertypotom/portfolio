@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import {
   Code2,
   Database,
@@ -19,6 +19,7 @@ import { HeroSection } from './hero'
 import { CTA } from './cta'
 import { Recommendations } from './recommendations'
 import { WorkExperience } from './work-experience'
+import { Modal } from '../../components/modal'
 
 const skillCategories = [
   {
@@ -227,7 +228,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <AnimatePresence>
+      <Modal isOpen={isSearchModalOpen}>
         {isSearchModalOpen && (
           <SkillSearchModal
             isOpen={isSearchModalOpen}
@@ -238,9 +239,9 @@ const Home: React.FC = () => {
             error={error}
           />
         )}
-      </AnimatePresence>
+      </Modal>
       {/* Modal */}
-      <AnimatePresence>
+      <Modal isOpen={!!selectedSkill}>
         {selectedSkill && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -303,13 +304,13 @@ const Home: React.FC = () => {
             </motion.div>
           </motion.div>
         )}
-      </AnimatePresence>
+      </Modal>
 
       {/* Work experience section */}
       <WorkExperience />
       {/* CTA Section */}
       <CTA />
-      {/* Testimonials Section */}
+      {/* Recommendations Section */}
       <Recommendations />
     </motion.main>
   )

@@ -16,6 +16,7 @@ export const CTA = () => {
             Interested in working with me?
           </h2>
           <Link
+            target='_blank'
             to="mailto:andrey.povstyanko.00@gmail.com?subject=🤘 Hi Andrey, I'd like to hire you"
             className='bg-orange-500 text-white px-8 py-3 rounded-full hover:bg-orange-600 hover:scale-105 transition-all font-semibold shadow-lg flex items-center gap-2 cursor-pointer'
           >
