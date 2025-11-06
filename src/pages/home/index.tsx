@@ -20,13 +20,22 @@ import { CTA } from './cta'
 import { Recommendations } from './recommendations'
 import { WorkExperience } from './work-experience'
 import { Modal } from '../../components/modal'
+import type { SkillCategory } from '../../types/skills'
 
-const skillCategories = [
+const skillCategories: SkillCategory[] = [
   {
     name: 'Languages',
     icon: Code2,
     color: 'bg-blue-500',
-    technologies: ['JavaScript', 'TypeScript', 'SQL', 'NoSQL', 'HTML5', 'CSS3'],
+    technologies: [
+      'JavaScript',
+      'TypeScript',
+      'Java',
+      'SQL',
+      'NoSQL',
+      'HTML5',
+      'CSS3',
+    ],
   },
   {
     name: 'Frontend',
@@ -37,14 +46,10 @@ const skillCategories = [
       'Next.js',
       'Redux',
       'Overmind',
-      'MobX',
-      'Zustand',
-      'Effector',
       'Styled Components',
       'MUI',
       'Ant Design',
       'Tailwind',
-      'Sass',
       'TanStack Query',
     ],
   },
@@ -70,20 +75,13 @@ const skillCategories = [
     name: 'DevOps & Cloud',
     icon: Cloud,
     color: 'bg-cyan-500',
-    technologies: [
-      'Vite',
-      'Webpack',
-      'Docker',
-      'CI/CD',
-      'ESLint',
-      'AWS (EC2, S3, CloudFront, VPC, Load Balancer, IAM, Monitoring)',
-    ],
+    technologies: ['Docker', 'CI/CD', 'AWS'],
   },
   {
     name: 'Tools & Design',
     icon: Wrench,
     color: 'bg-yellow-500',
-    technologies: ['Git', 'GitHub', 'GitLab', 'Figma'],
+    technologies: ['Vite', 'Webpack', 'Git', 'GitHub', 'GitLab', 'Figma'],
   },
   {
     name: 'AI',
@@ -94,8 +92,9 @@ const skillCategories = [
 ]
 
 const Home: React.FC = () => {
-  const [selectedSkill, setSelectedSkill] = useState<string | null>(null)
+  const [selectedSkill, setSelectedSkill] = useState<SkillCategory | null>(null)
   const [skillSearch, setSkillSearch] = useState('')
+  const [selectedSkillItem, setSelectedSkillItem] = useState('')
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false)
 
   const { analyzeSkill, isLoading, result, error, cancelRequest } =
@@ -103,8 +102,16 @@ const Home: React.FC = () => {
 
   const handleSearch = async () => {
     if (!skillSearch.trim()) return
+    setSelectedSkill(null)
     setIsSearchModalOpen(true)
     await analyzeSkill(skillSearch)
+  }
+
+  const handleSearchFromSelectingSkills = async (skill: string) => {
+    setSelectedSkillItem(skill)
+    setSelectedSkill(null)
+    setIsSearchModalOpen(true)
+    await analyzeSkill(skill)
   }
 
   const handleCloseModal = () => {
@@ -133,17 +140,6 @@ const Home: React.FC = () => {
         className='py-10 sm:py-16 md:py-20 px-4 bg-orange-50/40 overflow-hidden'
       >
         <div className='container mx-auto'>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className='text-xl text-gray-500 mb-4 leading-relaxed text-center mx-auto'
-          >
-            I also really enjoy listening to music. So while exploring my site,
-            I hope you'll enjoy my small playlist as well 😌
-          </motion.p>
-
           <motion.div
             initial={{ opacity: 0, scaleX: 0 }}
             whileInView={{ opacity: 1, scaleX: 1 }}
@@ -241,18 +237,6 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <Modal isOpen={isSearchModalOpen}>
-        {isSearchModalOpen && (
-          <SkillSearchModal
-            isOpen={isSearchModalOpen}
-            onClose={handleCloseModal}
-            searchQuery={skillSearch}
-            isLoading={isLoading}
-            result={result}
-            error={error}
-          />
-        )}
-      </Modal>
       {/* Modal */}
       <Modal isOpen={!!selectedSkill}>
         {selectedSkill && (
@@ -278,37 +262,38 @@ const Home: React.FC = () => {
                 <X size={24} />
               </button>
 
-              {skillCategories.find((s) => s.name === selectedSkill) && (
+              {skillCategories.find((s) => s.name === selectedSkill.name) && (
                 <>
                   <div className='flex items-center gap-4 mb-6'>
-                    {React.createElement(
-                      skillCategories.find((s) => s.name === selectedSkill)!
-                        .icon,
-                      {
-                        className: `${skillCategories
-                          .find((s) => s.name === selectedSkill)!
-                          .color.replace('bg-', 'text-')}`,
-                        size: 40,
-                      }
-                    )}
+                    {React.createElement(selectedSkill.icon, {
+                      className: `${selectedSkill.color.replace(
+                        'bg-',
+                        'text-'
+                      )}`,
+                      size: 40,
+                    })}
                     <h3 className='text-2xl font-bold text-gray-900'>
-                      {selectedSkill}
+                      {selectedSkill.name}
                     </h3>
                   </div>
 
                   <ul className='space-y-3'>
                     {skillCategories
-                      .find((s) => s.name === selectedSkill)!
+                      .find((s) => s.name === selectedSkill.name)!
                       .technologies.map((tech, idx) => (
                         <motion.li
+                          onClick={() => handleSearchFromSelectingSkills(tech)}
                           key={idx}
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: idx * 0.05 }}
-                          className='text-gray-700 flex items-start gap-3'
+                          className='text-gray-700 flex items-start gap-3 cursor-pointer group'
                         >
-                          <span className='w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0'></span>
-                          <span>{tech}</span>
+                          <span className='w-2 h-2 bg-orange-500 rounded-full mt-2 shrink-0'></span>
+                          <span className='relative'>
+                            {tech}
+                            <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full'></span>
+                          </span>
                         </motion.li>
                       ))}
                   </ul>
@@ -316,6 +301,18 @@ const Home: React.FC = () => {
               )}
             </motion.div>
           </motion.div>
+        )}
+      </Modal>
+
+      <Modal isOpen={isSearchModalOpen}>
+        {isSearchModalOpen && (
+          <SkillSearchModal
+            onClose={handleCloseModal}
+            searchQuery={skillSearch || selectedSkillItem}
+            isLoading={isLoading}
+            result={result}
+            error={error}
+          />
         )}
       </Modal>
 

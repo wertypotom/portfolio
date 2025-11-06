@@ -68,7 +68,6 @@ export const analyzeSkillUsage = async (
 
   const data = await response.json()
 
-  console.log('Data 😀', data)
   return {
     analysis: data.choices[0].message.content,
   }

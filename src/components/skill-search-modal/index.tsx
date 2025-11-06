@@ -3,7 +3,6 @@ import { X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 interface SkillSearchModalProps {
-  isOpen: boolean
   isLoading: boolean
   onClose: () => void
   searchQuery: string
@@ -51,15 +50,12 @@ const TypewriterText = ({ text }: { text: string }) => {
 }
 
 export const SkillSearchModal: React.FC<SkillSearchModalProps> = ({
-  isOpen,
   onClose,
   searchQuery,
   isLoading,
   result,
   error,
 }) => {
-  if (!isOpen) return null
-
   return (
     <motion.div
       initial={{ opacity: 0 }}

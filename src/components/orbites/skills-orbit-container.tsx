@@ -1,23 +1,16 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { type LucideIcon } from 'lucide-react'
 import { SkillOrbitIcon } from './skill-orbit-icon'
-
-interface SkillCategory {
-  name: string
-  icon: LucideIcon
-  color: string
-  technologies: string[]
-}
+import type { BreakpointConfig, SkillCategory } from '../../types/skills'
 
 interface SkillsOrbitContainerProps {
   skillCategories: SkillCategory[]
-  onSkillSelect: (skillName: string) => void
+  onSkillSelect: (skillName: SkillCategory) => void
 }
 
 const ROTATION_DURATION = 60
 
-const BREAKPOINT_CONFIGS = {
+const BREAKPOINT_CONFIGS: BreakpointConfig = {
   mobile: {
     className: 'sm:hidden',
     radius: 180,
@@ -61,7 +54,7 @@ export const SkillsOrbitContainer: React.FC<SkillsOrbitContainerProps> = ({
       {Object.entries(BREAKPOINT_CONFIGS).map(([breakpoint, config]) => (
         <motion.div
           key={breakpoint}
-          className={`absolute z-10 left-1/2 top-1/2 ${config.className}`}
+          className={`absolute z-30 left-1/2 top-1/2 ${config.className}`}
           animate={{ rotate: 360 }}
           transition={{
             duration: ROTATION_DURATION,
@@ -74,17 +67,10 @@ export const SkillsOrbitContainer: React.FC<SkillsOrbitContainerProps> = ({
 
             return (
               <SkillOrbitIcon
-                key={skill.name}
-                name={skill.name}
-                icon={skill.icon}
-                color={skill.color}
+                skill={skill}
                 angle={angle}
-                radius={config.radius}
+                config={config}
                 index={index}
-                iconSize={config.iconSize}
-                buttonSize={config.buttonSize}
-                labelSize={config.labelSize}
-                labelPosition={config.labelPosition}
                 onSelect={onSkillSelect}
               />
             )

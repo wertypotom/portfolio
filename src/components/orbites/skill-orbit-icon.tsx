@@ -1,38 +1,26 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { type LucideIcon } from 'lucide-react'
+import type { BreakpointConfig, SkillCategory } from '../../types/skills'
 
 interface SkillOrbitIconProps {
-  name: string
-  icon: LucideIcon
-  color: string
+  skill: SkillCategory
   angle: number
-  radius: number
   index: number
-  iconSize: number
-  buttonSize: number
-  labelSize: 'xs' | 'sm' | 'base'
-  labelPosition: { top: string; left: string }
-  onSelect: (name: string) => void
+  config: BreakpointConfig[keyof BreakpointConfig]
+  onSelect: (skill: SkillCategory) => void
 }
 
 const ROTATION_DURATION = 60
 
 export const SkillOrbitIcon: React.FC<SkillOrbitIconProps> = ({
-  name,
-  icon: Icon,
-  color,
+  skill,
+  config,
   angle,
-  radius,
   index,
-  iconSize,
-  buttonSize,
-  labelSize,
-  labelPosition,
   onSelect,
 }) => {
-  const x = Math.cos(angle) * radius
-  const y = Math.sin(angle) * radius
+  const x = Math.cos(angle) * config.radius
+  const y = Math.sin(angle) * config.radius
 
   const labelSizeClasses = {
     xs: 'text-xs',
@@ -42,7 +30,7 @@ export const SkillOrbitIcon: React.FC<SkillOrbitIconProps> = ({
 
   return (
     <motion.div
-      key={name}
+      key={skill.name}
       initial={{ opacity: 0, scale: 0 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
@@ -62,30 +50,31 @@ export const SkillOrbitIcon: React.FC<SkillOrbitIconProps> = ({
           ease: 'linear',
         }}
       >
-        <div
-          className='absolute -translate-x-1/2 bg-white px-2 py-1 rounded shadow-md whitespace-nowrap border'
+        <motion.div
+          className='absolute -translate-x-1/2 bg-white px-2 py-1 rounded shadow-md whitespace-nowrap border pointer-events-none select-none'
           style={{
-            top: labelPosition.top,
-            left: labelPosition.left,
+            top: config.labelPosition.top,
+            left: config.labelPosition.left,
           }}
         >
-          <span
-            className={`${labelSizeClasses[labelSize]} font-medium text-gray-900`}
+          <motion.span
+            className={`${
+              labelSizeClasses[config.labelSize]
+            } font-medium text-gray-900`}
           >
-            {name}
-          </span>
-        </div>
+            {skill.name}
+          </motion.span>
+        </motion.div>
         <motion.button
-          whileHover={{ scale: 1.2 }}
-          onClick={() => onSelect(name)}
-          className={`${color} rounded-full shadow-lg flex items-center justify-center cursor-pointer hover:shadow-2xl transition-shadow`}
+          onClick={() => onSelect(skill)}
+          className={`${skill.color} rounded-full shadow-lg flex items-center justify-center cursor-pointer hover:shadow-2xl transition-shadow`}
           style={{
-            width: `${buttonSize}px`,
-            height: `${buttonSize}px`,
+            width: `${config.buttonSize}px`,
+            height: `${config.buttonSize}px`,
           }}
           aria-label={`View ${name} skills`}
         >
-          <Icon className='text-white' size={iconSize} />
+          <skill.icon className='text-white' size={config.iconSize} />
         </motion.button>
       </motion.div>
     </motion.div>
