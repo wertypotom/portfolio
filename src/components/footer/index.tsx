@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
     },
     {
       icon: Mail,
-      href: 'mailto:andrey.povstyanko.00@gmail.com',
+      href: `mailto:andrey.povstyanko.00@gmail.com?subject=🤘 Hi Andrey, I'd like to hire you`,
     },
     {
       icon: Github,

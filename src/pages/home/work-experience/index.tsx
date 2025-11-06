@@ -24,10 +24,12 @@ const experiences: Experience[] = [
       'Client: M-Files, a Finnish tech company providing innovative information management software that utilizes metadata for efficient data organization and automation',
     achievements: [
       'Developed an internal marketing tool from scratch, using Next.js, Node.js, and TypeScript, achieving a fully functional MVP in 4 months that reduced client processing time by 600%.',
-      'Optimized performance-critical modules, achieving a 30% reduction in bundle size and page load times.',
-      'Migrated a legacy React frontend from JavaScript to TypeScript, reducing runtime bugs by 35% and improving code maintainability.',
-      'Built and maintained 48+ end-to-end tests using Playwright, achieving 80% test coverage.',
-      'Implemented WCAG-compliant accessibility, raising Lighthouse score from 65 to 90+.',
+      'Optimized performance-critical modules, using JavaScript, Styled Components, and Web Performance techniques, achieving a 30% reduction in bundle size and page load times.',
+      'Migrated a legacy React frontend from JavaScript to TypeScript, using ESLint and React Testing Library, reducing runtime bugs by 35% and improving code maintainability.',
+      'Migrated over 100 UI components using Ant Design and Styled Components to align with a new design system, completing the transition in under 4 weeks while preserving UX and accessibility.',
+      'Built and maintained 48+ end-to-end tests using Playwright, achieving 80% test coverage and improving release stability across critical user flows.',
+      'Implemented dynamic localization using i18next, made the application language-agnostic, and reduced future language integration effort by 90%.',
+      'Implemented WCAG-compliant accessibility, enabling full keyboard navigation, screen reader support, and raising Lighthouse score from 65 to 90+.',
     ],
     technologies: [
       'JavaScript',
@@ -50,11 +52,12 @@ const experiences: Experience[] = [
     location: 'Remote, Kazakhstan',
     description: 'B2B SaaS Platform for Legal and Government Clients',
     achievements: [
-      'Architected centralized state management using Redux Toolkit and RTK Query, resolving 15+ data storage related bugs.',
-      'Migrated 70+ UI components from an outdated Material Design system to modern MUI and Storybook.',
-      'Optimized React app performance by introducing lazy loading, reducing initial page load time by 40%.',
-      'Architected 5+ automation features in a government system, cutting processing time for key tasks by 85%.',
-      'Coached junior developers through weekly code reviews, reducing pull request defects by 25%.',
+      'Architected centralized state management using Redux Toolkit and RTK Query, resolving 15+ data storage related bugs and improving app scalability and maintainability.',
+      'Migrated 70+ UI components from an outdated Material Design system to modern MUI and Storybook, improving visual consistency, accessibility, and long-term maintainability.',
+      'Optimized React app performance by introducing lazy loading and refactoring re-renders, reducing initial page load time by 40% and improving Core Web Vitals.',
+      'Architected 5+ automation features in a government system using React and Node.js, cutting processing time for key tasks by 85%.',
+      'Refactored security-critical React modules, resolving 5+ vulnerabilities and ensuring zero critical issues in subsequent security reviews.',
+      'Mentored junior developers through weekly code reviews, improving adherence to best practices and reducing pull request defects by 25%.',
     ],
     technologies: [
       'JavaScript',
@@ -122,7 +125,7 @@ export const WorkExperience: React.FC = () => {
             >
               {/* Timeline connector for desktop */}
               {index !== experiences.length - 1 && (
-                <div className='hidden md:block absolute left-[182px] top-20 w-0.5 md:h-[500px] sm:h-[650px] bg-orange-200' />
+                <div className='hidden md:block absolute left-[182px] top-20 w-0.5 lg:h-[700px] md:h-[950px] sm:h-[1050px] bg-orange-200' />
               )}
 
               <div className='grid md:grid-cols-[240px_1fr] gap-6 md:gap-8'>
