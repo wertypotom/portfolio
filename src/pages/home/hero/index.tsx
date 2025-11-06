@@ -71,7 +71,7 @@ export const HeroSection = () => {
               className='flex flex-wrap gap-4'
             >
               <Link
-                to='/contact'
+                to="mailto:andrey.povstyanko.00@gmail.com?subject=🤘 Hi Andrey, I'd like to hire you"
                 className='inline-flex items-center bg-orange-500 text-white px-8 py-3 rounded-full hover:bg-orange-600 transition-all hover:scale-105 shadow-lg'
               >
                 Let's Work Together

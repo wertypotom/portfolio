@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { ArrowRight } from 'lucide-react'
 
 export const CTA = () => {
   return (
-    <section className='bg-orange-50 py-16 px-4 border-t-2 border-orange-200'>
+    <section className='bg-orange-50 py-16 px-4 border-t-2 border-b-2 border-orange-200'>
       <div className='container mx-auto'>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -15,10 +16,14 @@ export const CTA = () => {
             Interested in working with me?
           </h2>
           <Link
-            to='/contact'
-            className='bg-orange-500 text-white px-8 py-3 rounded-full hover:bg-orange-600 hover:scale-105 transition-all font-semibold shadow-lg'
+            to="mailto:andrey.povstyanko.00@gmail.com?subject=🤘 Hi Andrey, I'd like to hire you"
+            className='bg-orange-500 text-white px-8 py-3 rounded-full hover:bg-orange-600 hover:scale-105 transition-all font-semibold shadow-lg flex items-center gap-2 cursor-pointer'
           >
             Contact Now
+            <ArrowRight
+              size={24}
+              className='group-hover:scale-110 transition-transform'
+            />
           </Link>
         </motion.div>
       </div>

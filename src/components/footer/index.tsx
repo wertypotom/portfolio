@@ -1,16 +1,38 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Linkedin, Github } from 'lucide-react'
+import { Linkedin, Github, Phone, Mail } from 'lucide-react'
 
 const Footer: React.FC = () => {
   const socialLinks = [
-    { icon: Linkedin, href: '#' },
-    { icon: Github, href: '#' },
+    {
+      icon: Phone,
+      href: 'tel:+14143242521',
+    },
+    {
+      icon: Mail,
+      href: 'mailto:andrey.povstyanko.00@gmail.com',
+    },
+    {
+      icon: Github,
+      href: 'https://github.com/wertypotom',
+    },
+    {
+      icon: Linkedin,
+      href: 'https://www.linkedin.com/in/andrey-povstyanko/',
+    },
   ]
 
   return (
     <footer className='bg-orange-50 text-gray-800 py-12 border-t-2 border-orange-200'>
       <div className='container mx-auto px-4'>
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className='text-3xl font-bold text-center mb-8'
+        >
+          Contact me
+        </motion.h2>
         <motion.ul
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

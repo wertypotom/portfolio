@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Link } from 'react-router-dom'
 import {
   Code2,
   Database,
@@ -18,6 +17,7 @@ import { useSkillAnalysis } from '../../hooks/useSkillAnalysis'
 import { SkillSearchModal } from '../../components/skill-search-modal'
 import { HeroSection } from './hero'
 import { CTA } from './cta'
+import { Recommendations } from './recommendations'
 
 const skillCategories = [
   {
@@ -91,27 +91,6 @@ const skillCategories = [
   },
 ]
 
-const testimonials = [
-  {
-    image: '/assets/images/testi-1.jpg',
-    name: 'Jennifer Lutheran',
-    title: 'CEO at pxdraft',
-    text: "Dolor lorem is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-  },
-  {
-    image: '/assets/images/testi-2.jpg',
-    name: 'Michael Roberts',
-    title: 'CTO at TechCorp',
-    text: "Dolor lorem is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-  },
-  {
-    image: '/assets/images/testi-3.jpg',
-    name: 'Sarah Johnson',
-    title: 'Designer at Creative Co',
-    text: "Dolor lorem is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-  },
-]
-
 const Home: React.FC = () => {
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null)
   const [skillSearch, setSkillSearch] = useState('')
@@ -168,6 +147,23 @@ const Home: React.FC = () => {
             My Skills
           </motion.h2>
 
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className='text-xl text-gray-700 mb-4 leading-relaxed text-center max-w-4xl mx-auto'
+          >
+            My frontend expertise is complemented by a genuine curiosity for the
+            complete web ecosystem. I love understanding how{' '}
+            <span className='font-semibold text-orange-600'>
+              backend APIs, databases,{' '}
+            </span>{' '}
+            and <span className='font-semibold text-orange-600'>DevOps</span>{' '}
+            practices come together—because building great interfaces means
+            knowing what powers them.
+          </motion.p>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -178,13 +174,13 @@ const Home: React.FC = () => {
             <div className='relative w-full max-w-md'>
               <input
                 type='text'
-                placeholder='Looking for specific skill ?'
+                placeholder='Looking for specific skill I used ?'
                 value={skillSearch}
                 onChange={(e) => setSkillSearch(e.target.value)}
                 onKeyPress={handleKeyPress}
                 onFocus={(e) => (e.target.placeholder = '')}
                 onBlur={(e) =>
-                  (e.target.placeholder = 'Looking for specific skill ?')
+                  (e.target.placeholder = 'Looking for specific skill I used ?')
                 }
                 className='w-full px-6 py-3 pr-12 text-center bg-transparent border-2 border-orange-500 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:border-orange-500 transition-colors'
               />
@@ -310,50 +306,7 @@ const Home: React.FC = () => {
       {/* CTA Section */}
       <CTA />
       {/* Testimonials Section */}
-      <section className='py-20 px-4'>
-        <div className='container mx-auto'>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className='text-4xl font-bold text-center text-gray-900 mb-12'
-          >
-            Testimonial
-          </motion.h2>
-
-          <div className='grid md:grid-cols-3 gap-8'>
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
-                whileHover={{ y: -10 }}
-                className='bg-white p-8 rounded-2xl shadow-xl relative'
-              >
-                <div className='flex items-center mb-4'>
-                  <img
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    className='w-16 h-16 rounded-full object-cover mr-4'
-                  />
-                  <div>
-                    <p className='font-semibold text-gray-900'>
-                      {testimonial.name}
-                    </p>
-                    <p className='text-sm text-gray-500'>{testimonial.title}</p>
-                  </div>
-                </div>
-                <p className='text-gray-600 italic'>{testimonial.text}</p>
-                <div className='absolute bottom-4 right-4 text-6xl text-orange-200 opacity-50'>
-                  "
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Recommendations />
     </motion.main>
   )
 }
