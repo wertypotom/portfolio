@@ -36,7 +36,7 @@ const BREAKPOINT_CONFIGS = {
   },
   desktop: {
     className: 'hidden md:block lg:hidden',
-    radius: 300,
+    radius: 260,
     iconSize: 36,
     buttonSize: 96,
     labelSize: 'sm' as const,
@@ -44,7 +44,7 @@ const BREAKPOINT_CONFIGS = {
   },
   large: {
     className: 'hidden lg:block',
-    radius: 380,
+    radius: 320,
     iconSize: 40,
     buttonSize: 112,
     labelSize: 'base' as const,

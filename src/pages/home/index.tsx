@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import {
-  ArrowRight,
   Code2,
   Database,
   TestTube,
@@ -12,9 +11,13 @@ import {
   Brain,
   Cpu,
   X,
-  ArrowDown,
+  Search,
 } from 'lucide-react'
 import { SkillsOrbitContainer } from '../../components/orbites'
+import { useSkillAnalysis } from '../../hooks/useSkillAnalysis'
+import { SkillSearchModal } from '../../components/skill-search-modal'
+import { HeroSection } from './hero'
+import { CTA } from './cta'
 
 const skillCategories = [
   {
@@ -112,11 +115,25 @@ const testimonials = [
 const Home: React.FC = () => {
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null)
   const [skillSearch, setSkillSearch] = useState('')
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false)
 
-  const scrollToSkills = () => {
-    const skillsSection = document.getElementById('skills-section')
-    if (skillsSection) {
-      skillsSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  const { analyzeSkill, isLoading, result, error, cancelRequest } =
+    useSkillAnalysis()
+
+  const handleSearch = async () => {
+    if (!skillSearch.trim()) return
+    setIsSearchModalOpen(true)
+    await analyzeSkill(skillSearch)
+  }
+
+  const handleCloseModal = () => {
+    cancelRequest()
+    setIsSearchModalOpen(false)
+  }
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSearch()
     }
   }
 
@@ -127,139 +144,26 @@ const Home: React.FC = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
-      {/* Hero Section */}
-      <section className='hero-section relative pt-32 pb-20 px-4 overflow-hidden bg-orange-50/40'>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: 'easeOut' }}
-          className='absolute top-[-10%] right-[-15%] w-[50%] h-[60%] bg-orange-300/40 -rotate-45 rounded-[20%]'
-          style={{
-            transformOrigin: 'center',
-          }}
-        />
-
-        <div className='container mx-auto relative z-10'>
-          <div className='grid md:grid-cols-2 gap-12 items-center'>
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}
-                className='text-orange-600 font-semibold tracking-wider mb-4 text-lg'
-              >
-                👋 Hi, I'm Andrey Povstyanko
-              </motion.p>
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className='text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight'
-              >
-                Senior Web Developer
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
-                className='text-xl text-gray-700 mb-4 leading-relaxed'
-              >
-                5+ years building performant, intuitive web applications with{' '}
-                <span className='font-semibold text-orange-600'>
-                  React, Next.js & TypeScript
-                </span>
-              </motion.p>
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.45 }}
-                className='text-lg text-gray-600 mb-8'
-              >
-                📍 Milwaukee, WI • Open to relocation across the US
-              </motion.p>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                className='flex flex-wrap gap-4'
-              >
-                <Link
-                  to='/contact'
-                  className='inline-flex items-center bg-orange-500 text-white px-8 py-3 rounded-full hover:bg-orange-600 transition-all hover:scale-105 shadow-lg'
-                >
-                  Let's Work Together
-                  <ArrowRight className='ml-2' size={20} />
-                </Link>
-                <a
-                  href='/assets/resume.pdf'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='inline-flex items-center bg-white text-gray-800 px-8 py-3 rounded-full border-2 border-gray-300 hover:border-orange-500 hover:text-orange-600 transition-all hover:scale-105'
-                >
-                  View Resume
-                </a>
-              </motion.div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className='relative flex justify-center'
-            >
-              <img
-                src='/assets/images/banner-me.png'
-                alt='Andrey Povstyanko'
-                className='w-full h-auto max-w-md lg:max-w-lg xl:max-w-xl mx-auto drop-shadow-2xl object-contain'
-              />
-            </motion.div>
-          </div>
-
-          {/* My Skills Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-            className='flex justify-center mt-16'
-          >
-            <button
-              onClick={scrollToSkills}
-              className='inline-flex flex-col items-center gap-2 text-orange-600 hover:text-orange-700 transition-colors group'
-            >
-              <span className='text-lg font-semibold'>My Skills</span>
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
-              >
-                <ArrowDown
-                  size={24}
-                  className='group-hover:scale-110 transition-transform'
-                />
-              </motion.div>
-            </button>
-          </motion.div>
-        </div>
-      </section>
-
+      <HeroSection />
       {/* Skills Section */}
       <section
         id='skills-section'
         className='py-10 sm:py-16 md:py-20 px-4 bg-orange-50/40 overflow-hidden'
       >
         <div className='container mx-auto'>
+          <motion.div
+            initial={{ opacity: 0, scaleX: 0 }}
+            whileInView={{ opacity: 1, scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className='w-8/10 h-1 bg-orange-500 mx-auto mb-8'
+          />
+
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className='text-3xl sm:text-4xl font-bold text-center text-gray-900 -mb-6 -sm:mb-8 -md:mb-10'
+            className='text-3xl mb-5 sm:text-4xl font-bold text-center text-gray-900 -sm:mb-8 -md:mb-10'
           >
             My Skills
           </motion.h2>
@@ -271,20 +175,38 @@ const Home: React.FC = () => {
             transition={{ delay: 0.2 }}
             className='flex justify-center mt-10'
           >
-            <input
-              type='text'
-              placeholder='Looking for specific skill ?'
-              value={skillSearch}
-              onChange={(e) => setSkillSearch(e.target.value)}
-              onFocus={(e) => (e.target.placeholder = '')}
-              onBlur={(e) =>
-                (e.target.placeholder = 'Looking for specific skill ?')
-              }
-              className='w-full max-w-md px-6 py-3 text-center bg-transparent border-2 border-orange-300 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:border-orange-500 transition-colors'
-            />
+            <div className='relative w-full max-w-md'>
+              <input
+                type='text'
+                placeholder='Looking for specific skill ?'
+                value={skillSearch}
+                onChange={(e) => setSkillSearch(e.target.value)}
+                onKeyPress={handleKeyPress}
+                onFocus={(e) => (e.target.placeholder = '')}
+                onBlur={(e) =>
+                  (e.target.placeholder = 'Looking for specific skill ?')
+                }
+                className='w-full px-6 py-3 pr-12 text-center bg-transparent border-2 border-orange-500 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:border-orange-500 transition-colors'
+              />
+              <button
+                onClick={handleSearch}
+                className='absolute right-4 top-1/2 -translate-y-1/2 text-orange-500 hover:text-orange-600 transition-colors'
+                aria-label='Search skill'
+              >
+                <Search size={20} />
+              </button>
+            </div>
           </motion.div>
 
           <div className='relative w-full max-w-6xl mx-auto flex justify-center items-center h-[500px] sm:h-[650px] md:h-[850px] lg:h-[950px]'>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className='absolute z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 sm:w-54 sm:h-54 md:w-70 md:h-70 lg:w-100 lg:h-100 bg-orange-300/40 rounded-full'
+            />
+
             {/* Center Image - Much Bigger */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
@@ -307,6 +229,19 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
+
+      <AnimatePresence>
+        {isSearchModalOpen && (
+          <SkillSearchModal
+            isOpen={isSearchModalOpen}
+            onClose={handleCloseModal}
+            searchQuery={skillSearch}
+            isLoading={isLoading}
+            result={result}
+            error={error}
+          />
+        )}
+      </AnimatePresence>
       {/* Modal */}
       <AnimatePresence>
         {selectedSkill && (
@@ -372,29 +307,8 @@ const Home: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
-
       {/* CTA Section */}
-      <section className='bg-gray-900 py-16 px-4'>
-        <div className='container mx-auto'>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className='flex flex-col md:flex-row items-center justify-between gap-6'
-          >
-            <h2 className='text-3xl md:text-4xl font-bold text-white'>
-              Interested working with me?
-            </h2>
-            <Link
-              to='/contact'
-              className='bg-white text-gray-900 px-8 py-3 rounded-full hover:bg-gray-100 transition-colors font-semibold'
-            >
-              Contact Now
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
+      <CTA />
       {/* Testimonials Section */}
       <section className='py-20 px-4'>
         <div className='container mx-auto'>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import Home from './pages/home'
-import Services from './pages/services'
 import Portfolio from './pages/portfolio'
 import Contact from './pages/contact'
 import Header from './components/header'
@@ -45,7 +44,6 @@ const AnimatedRoutes: React.FC = () => {
     <AnimatePresence mode='wait'>
       <Routes location={location} key={location.pathname}>
         <Route path='/' element={<Home />} />
-        <Route path='/services' element={<Services />} />
         <Route path='/portfolio' element={<Portfolio />} />
         <Route path='/contact' element={<Contact />} />
       </Routes>
