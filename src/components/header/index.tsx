@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import { Menu, X, MessageCircleMore } from 'lucide-react'
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const location = useLocation()
+  // const location = useLocation()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,10 +16,10 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const navItems = [
-    // { name: 'Home', path: '/' },
-    // { name: 'Portfolio', path: '/portfolio' },
-  ]
+  // const navItems = [
+  //   // { name: 'Home', path: '/' },
+  //   // { name: 'Portfolio', path: '/portfolio' },
+  // ]
 
   return (
     <motion.header
@@ -37,7 +37,7 @@ const Header: React.FC = () => {
 
         {/* Desktop Navigation */}
         <nav className='hidden md:flex items-center space-x-8'>
-          {navItems.map((item) => (
+          {/* {navItems.map((item) => (
             <Link
               key={item.path}
               to={item.path}
@@ -55,7 +55,7 @@ const Header: React.FC = () => {
                 />
               )}
             </Link>
-          ))}
+          ))} */}
         </nav>
 
         <Link
@@ -77,7 +77,7 @@ const Header: React.FC = () => {
       </div>
 
       {/* Mobile Menu */}
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
@@ -103,7 +103,7 @@ const Header: React.FC = () => {
             </nav>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </motion.header>
   )
 }

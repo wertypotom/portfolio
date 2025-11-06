@@ -1,4 +1,4 @@
-export const extractResumeText = async (pdfPath: string): Promise<string> => {
+export const extractResumeText = async (): Promise<string> => {
   // For now, return a hardcoded version of your resume text
   // Later you can implement PDF parsing if needed
   return `

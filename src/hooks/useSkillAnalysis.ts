@@ -23,7 +23,7 @@ export const useSkillAnalysis = () => {
     setResult('')
 
     try {
-      const resumeText = await extractResumeText('/assets/resume.pdf')
+      const resumeText = await extractResumeText()
       const response = await analyzeSkillUsage(
         skill,
         resumeText,
