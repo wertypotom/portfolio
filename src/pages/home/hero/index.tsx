@@ -1,16 +1,16 @@
-import { motion } from 'framer-motion'
-import { ArrowRight, X } from 'lucide-react'
-import { Link } from 'react-router-dom'
-import { useState } from 'react'
-import { Modal } from '../../../components/modal'
+import { motion } from 'framer-motion';
+import { ArrowRight, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Modal } from '../../../components/modal';
 
 export const HeroSection = () => {
-  const [isPdfModalOpen, setIsPdfModalOpen] = useState(false)
+  const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
 
   const handleViewResume = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
-    setIsPdfModalOpen(true)
-  }
+    e.preventDefault();
+    setIsPdfModalOpen(true);
+  };
 
   return (
     <>
@@ -164,5 +164,5 @@ export const HeroSection = () => {
         )}
       </Modal>
     </>
-  )
-}
+  );
+};
