@@ -135,7 +135,7 @@ export const HeroSection = () => {
                 </h3>
                 <div className='flex items-center gap-3'>
                   <a
-                    href='/src/Senior Frontend Developer - Andrey Povstyanko.pdf'
+                    href='/assets/resume.pdf'
                     download='Andrey_Povstyanko_Resume.pdf'
                     className='px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors text-sm font-medium'
                   >
@@ -154,7 +154,7 @@ export const HeroSection = () => {
               {/* PDF Viewer */}
               <div className='flex-1 overflow-hidden'>
                 <iframe
-                  src='/src/Senior Frontend Developer - Andrey Povstyanko.pdf'
+                  src='/assets/resume.pdf'
                   className='w-full h-full border-0'
                   title='Resume PDF'
                 />
