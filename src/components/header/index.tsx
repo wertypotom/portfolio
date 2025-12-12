@@ -1,41 +1,42 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
-import { Menu, X, MessageCircleMore } from 'lucide-react'
-import AnchorLink from 'react-anchor-link-smooth-scroll'
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Menu, X, MessageCircleMore } from 'lucide-react';
+import AnchorLink from 'react-anchor-link-smooth-scroll';
 
 const navItems = [
   { name: 'Home', path: '#hero' },
+  { name: 'Projects', path: '#projects' },
   { name: 'Skills', path: '#skills' },
   { name: 'Work experience', path: '#work-experience' },
   { name: 'Recommendations', path: '#recommendations' },
-]
+];
 
 const Header: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState('#hero')
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('#hero');
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
+      setIsScrolled(window.scrollY > 50);
 
       // Determine active section based on scroll position
-      const sections = navItems.map((item) => item.path.substring(1))
-      const scrollPosition = window.scrollY + 100 // Offset for header height
+      const sections = navItems.map((item) => item.path.substring(1));
+      const scrollPosition = window.scrollY + 100; // Offset for header height
 
       for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i])
+        const section = document.getElementById(sections[i]);
         if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection(`#${sections[i]}`)
-          break
+          setActiveSection(`#${sections[i]}`);
+          break;
         }
       }
-    }
+    };
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <motion.header
@@ -138,7 +139,7 @@ const Header: React.FC = () => {
         )}
       </AnimatePresence>
     </motion.header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

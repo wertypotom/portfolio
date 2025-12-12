@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { motion } from 'framer-motion'
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import {
   Code2,
   Database,
@@ -11,16 +11,17 @@ import {
   Cpu,
   X,
   Search,
-} from 'lucide-react'
-import { SkillsOrbitContainer } from '../../components/orbites'
-import { useSkillAnalysis } from '../../hooks/useSkillAnalysis'
-import { SkillSearchModal } from '../../components/skill-search-modal'
-import { HeroSection } from './hero'
-import { CTA } from './cta'
-import { Recommendations } from './recommendations'
-import { WorkExperience } from './work-experience'
-import { Modal } from '../../components/modal'
-import type { SkillCategory } from '../../types/skills'
+} from 'lucide-react';
+import { SkillsOrbitContainer } from '../../components/orbites';
+import { useSkillAnalysis } from '../../hooks/useSkillAnalysis';
+import { SkillSearchModal } from '../../components/skill-search-modal';
+import { HeroSection } from './hero';
+import { CTA } from './cta';
+import { Recommendations } from './recommendations';
+import { WorkExperience } from './work-experience';
+import { Projects } from './projects';
+import { Modal } from '../../components/modal';
+import type { SkillCategory } from '../../types/skills';
 
 const skillCategories: SkillCategory[] = [
   {
@@ -89,42 +90,44 @@ const skillCategories: SkillCategory[] = [
     color: 'bg-indigo-500',
     technologies: ['ChatGPT', 'Claude', 'GitHub Copilot'],
   },
-]
+];
 
 const Home: React.FC = () => {
-  const [selectedSkill, setSelectedSkill] = useState<SkillCategory | null>(null)
-  const [skillSearch, setSkillSearch] = useState('')
-  const [selectedSkillItem, setSelectedSkillItem] = useState('')
-  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false)
+  const [selectedSkill, setSelectedSkill] = useState<SkillCategory | null>(
+    null
+  );
+  const [skillSearch, setSkillSearch] = useState('');
+  const [selectedSkillItem, setSelectedSkillItem] = useState('');
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
 
   const { analyzeSkill, isLoading, result, error, cancelRequest } =
-    useSkillAnalysis()
+    useSkillAnalysis();
 
   const handleSearch = async () => {
-    if (!skillSearch.trim()) return
-    setSelectedSkill(null)
-    setIsSearchModalOpen(true)
-    await analyzeSkill(skillSearch)
-  }
+    if (!skillSearch.trim()) return;
+    setSelectedSkill(null);
+    setIsSearchModalOpen(true);
+    await analyzeSkill(skillSearch);
+  };
 
   const handleSearchFromSelectingSkills = async (skill: string) => {
-    setSelectedSkillItem(skill)
-    setSelectedSkill(null)
-    setIsSearchModalOpen(true)
-    await analyzeSkill(skill)
-  }
+    setSelectedSkillItem(skill);
+    setSelectedSkill(null);
+    setIsSearchModalOpen(true);
+    await analyzeSkill(skill);
+  };
 
   const handleCloseModal = () => {
-    cancelRequest()
-    setIsSearchModalOpen(false)
-    setSkillSearch('')
-  }
+    cancelRequest();
+    setIsSearchModalOpen(false);
+    setSkillSearch('');
+  };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      handleSearch()
+      handleSearch();
     }
-  }
+  };
 
   return (
     <motion.main
@@ -134,6 +137,8 @@ const Home: React.FC = () => {
       transition={{ duration: 0.5 }}
     >
       <HeroSection />
+      {/* Projects Section */}
+      <Projects />
       {/* Skills Section */}
       <section
         id='skills'
@@ -323,7 +328,7 @@ const Home: React.FC = () => {
       {/* Recommendations Section */}
       <Recommendations />
     </motion.main>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
