@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { X, ExternalLink, Github } from 'lucide-react';
+import { X, ExternalLink } from 'lucide-react';
 import { MermaidDiagram } from '../../../components/mermaid-diagram';
 import type { Project } from './projects-data';
 
@@ -37,19 +37,6 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             <p className='text-orange-600 font-semibold'>{project.subtitle}</p>
           </div>
           <div className='flex items-center gap-3'>
-            {project.githubLinks?.map((github, idx) => (
-              <a
-                key={idx}
-                href={github.url}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition-colors text-sm font-medium flex items-center gap-2'
-                title={`${github.label} Repository`}
-              >
-                <Github size={16} />
-                {github.label}
-              </a>
-            ))}
             <a
               href={project.link}
               target='_blank'

@@ -52,16 +52,6 @@ export const projects: Project[] = [
     subtitle: 'AI-Powered Job Aggregation Platform',
     coverImage: '/assets/images/jobsniper-cover.png',
     link: 'https://www.jobsniper.work',
-    githubLinks: [
-      {
-        label: 'Frontend',
-        url: 'https://github.com/wertypotom/telegram-jobs-client',
-      },
-      {
-        label: 'Backend',
-        url: 'https://github.com/wertypotom/telegram-jobs-server',
-      },
-    ],
     techStack: [
       'Next.js 15',
       'React 19',
