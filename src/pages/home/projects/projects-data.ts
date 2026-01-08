@@ -14,6 +14,11 @@ export interface Project {
     timeline: string;
     keyCapabilities: string[];
   };
+  teamRoles?: {
+    role: string;
+    agent: string;
+    focus: string;
+  }[];
   architecture: {
     description: string;
     layers: {
@@ -26,6 +31,16 @@ export interface Project {
     systemDesign: string;
     backendDiagram: string;
   };
+  developmentMethodology?: {
+    title: string;
+    description: string;
+    items?: string[];
+  }[];
+  securityFeatures?: string[];
+  qualityAssurance?: {
+    title: string;
+    items: string[];
+  }[];
   techStackDetails: {
     backend: { name: string; purpose: string }[];
     frontend: { name: string; purpose: string }[];
@@ -49,7 +64,7 @@ export const projects: Project[] = [
   {
     id: 'jobsniper',
     title: 'JobSniper',
-    subtitle: 'AI-Powered Job Aggregation Platform',
+    subtitle: 'AI-Powered Job Aggregation Platform | 3-Week Build',
     coverImage: '/assets/images/jobsniper-cover.png',
     link: 'https://www.jobsniper.work',
     techStack: [
@@ -59,51 +74,79 @@ export const projects: Project[] = [
       'Node.js',
       'Express',
       'MongoDB',
-      'Telegram API',
       'Gemini AI',
       'TailwindCSS 4',
     ],
     overview: {
       description:
-        'JobSniper automates job discovery and application by monitoring curated Telegram channels in real-time, parsing unstructured job posts with AI into structured data, filtering jobs with advanced multi-dimensional search, generating AI-tailored resumes for each position, and sending smart notifications for matching opportunities.',
-      timeline: '8 days (November 29 - December 10, 2025)',
+        'Job seekers waste hours browsing Telegram channels, manually filtering jobs, and tailoring resumes. JobSniper solves this with a centralized platform that scrapes Telegram channels in real-time, parses jobs with AI into structured data, filters via advanced multi-dimensional search, generates AI-tailored resumes (PDF/DOCX), and sends smart Telegram notifications.',
+      timeline: '3 weeks (November 29 - December 20, 2025)',
       keyCapabilities: [
-        'Monitoring curated Telegram channels in real-time',
-        'Parsing unstructured job posts with AI into structured data',
-        'Filtering jobs with advanced multi-dimensional search',
-        'Generating AI-tailored resumes for each position',
-        'Sending smart notifications for matching opportunities',
+        'Orchestrated 7 specialized AI agents for rapid development',
+        'Implemented production-grade 3-layer backend architecture',
+        'Built real-time scraping system with GramJS',
+        'Integrated dual-provider AI pipeline (Gemini + Abacus)',
+        'Delivered full CI/CD, security, and payment integration',
       ],
     },
+    teamRoles: [
+      {
+        role: 'Team Lead',
+        agent: 'Claude',
+        focus: 'Architecture, reviews, planning',
+      },
+      {
+        role: 'Backend Dev',
+        agent: 'Claude',
+        focus: 'Express APIs, MongoDB queries',
+      },
+      {
+        role: 'Frontend Dev',
+        agent: 'Claude',
+        focus: 'Next.js, React components',
+      },
+      { role: 'DevOps', agent: 'Claude', focus: 'Deployment, migrations' },
+      {
+        role: 'Product Analyst',
+        agent: 'Gemini',
+        focus: 'User flows, edge cases',
+      },
+      {
+        role: 'Architect',
+        agent: 'Gemini',
+        focus: 'System design, data models',
+      },
+      { role: 'QA', agent: 'Claude', focus: 'Validation, security reviews' },
+    ],
     architecture: {
       description:
-        'Full-stack application built with a modern 3-layer backend architecture and a performant Next.js frontend with React Query for server state management.',
+        'Built a production-grade full-stack platform with a clean 3-layer backend architecture (Controller → Service → Repository) and a highly performant Next.js 15 frontend using Server Components and React Query.',
       layers: [
         {
           name: 'HTTP Layer (Controllers)',
           description: 'Request handling and response formatting',
           components: [
-            'Request validation (Joi schemas)',
-            'JWT authentication check',
-            'Format responses',
+            'Joi validation schemas',
+            'JWT authentication guard',
+            'Unified response format',
           ],
         },
         {
           name: 'Business Logic (Services)',
           description: 'Core application logic and orchestration',
           components: [
-            'Orchestrate operations',
-            'Call AI providers',
-            'Compose sub-services',
+            '13 service layers',
+            'Service composition',
+            'AI provider fallback strategy',
           ],
         },
         {
           name: 'Data Access (Repositories)',
           description: 'Database and file system operations',
           components: [
-            'MongoDB queries',
-            'Mongoose models',
-            'File system operations',
+            'Optimized MongoDB queries',
+            'Compound indexes',
+            'Atomic updates',
           ],
         },
       ],
@@ -127,18 +170,20 @@ export const projects: Project[] = [
         H[Scraper Service]
         I[Sniper Service]
         J[Notification Service]
+        K[Payment Service]
     end
 
     subgraph "External Services"
-        K[Telegram GramJS]
-        L[Telegram Bot API]
-        M[Gemini AI]
-        N[Abacus AI]
+        L[Telegram GramJS]
+        M[Telegram Bot API]
+        N[Gemini AI]
+        O[Abacus AI]
+        P[LemonSqueezy]
     end
 
     subgraph "Data Layer"
-        O[MongoDB Atlas]
-        P[File Storage]
+        Q[MongoDB Atlas]
+        R[File Storage]
     end
 
     A --> E
@@ -149,13 +194,15 @@ export const projects: Project[] = [
     F --> H
     F --> I
     F --> J
-    H --> K
-    J --> L
-    G --> M
-    I --> N
-    G --> O
-    H --> O
-    I --> P`,
+    F --> K
+    H --> L
+    J --> M
+    G --> N
+    I --> O
+    K --> P
+    G --> Q
+    H --> Q
+    I --> R`,
       backendDiagram: `flowchart TB
     subgraph HTTP["HTTP Layer (Controllers)"]
         direction LR
@@ -181,107 +228,149 @@ export const projects: Project[] = [
     HTTP --> BL
     BL --> DA`,
     },
+    developmentMethodology: [
+      {
+        title: 'Strategic AI Delegation',
+        description:
+          'Instead of generic "write this" prompts, I orchestrated AI as specialized team members:',
+        items: [
+          '"Claude (Team Lead): Design 3-layer architecture with path aliases"',
+          '"Gemini (Product): Analyze user flow for channel onboarding"',
+          '"Claude (Backend): Implement job filtering with MongoDB compound indexes"',
+        ],
+      },
+      {
+        title: 'Iterative Refinement',
+        description:
+          'Never accepted first outputs. Reviewed and refined every piece of code:',
+        items: [
+          '50+ Claude iterations for core logic',
+          'Enforced strict TypeScript types (no "any")',
+          'Demanded performance optimizations (indexing, caching)',
+        ],
+      },
+    ],
+    securityFeatures: [
+      'JWT authentication with HTTP-only cookies',
+      'Input validation (Joi schemas on all 30+ endpoints)',
+      'Password hashing (bcrypt)',
+      'File type validation (PDF/DOCX only)',
+      'CORS whitelist configuration',
+      'Environment secrets protection',
+      'Error sanitization in production',
+    ],
+    qualityAssurance: [
+      {
+        title: 'Testing & Quality',
+        items: [
+          'Jest & Supertest for integration testing',
+          'ESLint & Prettier for code consistency',
+          'Husky pre-commit hooks (lint-staged)',
+          'GitHub Actions for CI/CD',
+        ],
+      },
+    ],
     techStackDetails: {
       backend: [
         {
-          name: 'Node.js 18+',
-          purpose: 'Async/await, event-driven architecture',
+          name: 'Node.js + Express',
+          purpose: 'Scalable REST API architecture',
         },
-        { name: 'Express.js 4', purpose: 'Lightweight REST API framework' },
         {
           name: 'TypeScript 5.3',
-          purpose: 'Type safety, interfaces, path aliases',
+          purpose: 'Strict type safety & path aliases',
         },
         {
           name: 'MongoDB Atlas',
-          purpose: 'Flexible schema for unstructured job data',
+          purpose: 'Flexible schema with compound indexes',
         },
-        { name: 'Mongoose 8', purpose: 'Schema validation, middleware hooks' },
-        {
-          name: 'GramJS 2.26',
-          purpose: 'Official Telegram library for message scraping',
-        },
-        { name: 'Gemini API', purpose: 'Job parsing, resume tailoring' },
-        {
-          name: 'JWT + bcrypt',
-          purpose: 'Stateless auth, secure password hashing',
-        },
+        { name: 'GramJS', purpose: 'Real-time Telegram message listening' },
+        { name: 'Gemini + Abacus', purpose: 'Dual-provider AI pipeline' },
+        { name: 'Joi + JWT', purpose: 'Validation and stateless auth' },
       ],
       frontend: [
-        { name: 'Next.js 15', purpose: 'React framework with App Router' },
-        { name: 'React 19', purpose: 'Latest React with concurrent features' },
-        { name: 'TypeScript 5.7', purpose: 'Strict type safety' },
+        { name: 'Next.js 15', purpose: 'App Router & Server Components' },
+        { name: 'React 19', purpose: 'Concurrent features & Actions' },
+        { name: 'Tailwind CSS 4', purpose: 'Modern utility-first styling' },
+        { name: 'React Query 5', purpose: 'Server state & optimistic updates' },
+        { name: 'Zustand', purpose: 'Lightweight client state management' },
         {
-          name: 'Tailwind CSS 4',
-          purpose: 'Utility-first CSS, OKLCH color space',
+          name: 'NextAuth.js',
+          purpose: 'Multi-provider OAuth (Google, Yandex)',
         },
-        { name: 'React Query 5', purpose: 'Server state caching, mutations' },
-        { name: 'Zustand 5', purpose: 'Lightweight client state' },
-        { name: 'NextAuth.js 4', purpose: 'Multi-provider OAuth' },
+        {
+          name: 'Internationalization (i18n)',
+          purpose: 'Multi-language support (English, Russian)',
+        },
       ],
       integrations: [
-        'Telegram GramJS (Real-time scraping)',
-        'Telegram Bot API (Notifications)',
-        'Gemini AI + Abacus.ai (Dual provider)',
-        'MongoDB Atlas (Optimized schemas)',
+        'Telegram (GramJS + Bot API)',
+        'AI (Gemini + Abacus)',
+        'Payments (LemonSqueezy)',
+        'Database (MongoDB Atlas)',
       ],
     },
     keyFeatures: [
       {
         title: 'Advanced Job Filtering',
         description:
-          'Multi-dimensional filters: tech stack, level, location, experience, job function with real-time autocomplete and fuzzy search.',
+          'Multi-dimensional filters (tech stack, level, location) with real-time specific autocomplete, fuzzy search, and persistent user preferences.',
       },
       {
         title: 'AI Resume Tailoring',
         description:
-          'Upload base resume and AI customizes it per job, generating PDF, DOCX, cover letter, and Telegram message.',
+          'Upload a base resume and the system generates a custom PDF/DOCX and cover letter tailored to the specific job description using AI.',
+      },
+      {
+        title: 'Internationalization (i18n)',
+        description:
+          'Complete multi-language support (English/Russian) with locale detection, dictionary-based translations, and localized routing.',
       },
       {
         title: 'Smart Notifications',
         description:
-          'Custom filters per user, quiet hours (timezone-aware), deduplication, and Telegram bot with inline keyboards.',
+          'Timezone-aware quiet hours, custom deduplication logic, and interactive Telegram bot notifications with inline action buttons.',
       },
       {
         title: 'Channel Onboarding',
         description:
-          'Curated bundles like "Tech Starter Pack" and "Senior Roles" with 6 swaps/month for free tier.',
+          'Curated channel bundles ("Tech Starter Pack"), subscription management limits (Free vs Premium), and automated discovery.',
       },
       {
         title: 'Real-Time Scraping',
         description:
-          'GramJS listener for new messages, external page scraping, and auto-cleanup for jobs older than 7 days.',
+          'Event-driven architecture using GramJS listeners for instant job detection, coupled with scheduled cleanup jobs.',
       },
     ],
     skillsDemonstrated: {
       technical: [
-        'Full-Stack Development (Node.js/Express + Next.js/React)',
-        'TypeScript Mastery (Strict types, interfaces, path aliases)',
-        'Database Design (MongoDB schema optimization, indexing)',
-        'RESTful API Design (Request validation, error handling)',
-        'Multi-provider Authentication (JWT, OAuth, NextAuth)',
-        'AI Integration (Prompt engineering, dual-provider fallback)',
-        'Real-Time Systems (Telegram message listening, webhooks)',
-        'State Management (React Query + Zustand)',
-        'Security (Input validation, file upload restrictions)',
+        'Full-Stack Architecture (Node.js/Express + Next.js)',
+        'TypeScript Mastery (Strict types, interfaces)',
+        'Database Optimization (Indexes, TTL, Aggregation)',
+        'AI Integration (Prompt engineering, Fallback strategies)',
+        'Real-Time Systems (Webhooks, Event listeners)',
+        'Internationalization (i18n Architecture)',
+        'Security Implementation (Auth, Validation, Sanitization)',
+        'Modern Frontend (SSR, RSC, State Management)',
+        'DevOps (CI/CD, Docker, Environment Config)',
       ],
       soft: [
-        'Project Planning (Breaking complex system into 11 modules)',
-        'AI Collaboration (Strategic delegation to AI agents)',
-        'Code Quality (Clean architecture, type safety)',
-        'Product Thinking (User flows, onboarding, free tier limits)',
-        'Time Management (Production-ready in 8 days)',
+        'Strategic AI Orchestration (Team Lead role)',
+        'Product Thinking (User Experience, Monetization)',
+        'System Design (Scalability, Modularity)',
+        'Rapid Prototyping (3-week delivery)',
+        'Quality Focus (Documentation, Testing)',
       ],
     },
     metrics: [
-      { name: 'Development Time', value: '8 days' },
+      { name: 'Development Time', value: '3 weeks' },
       { name: 'Lines of Code', value: '~15,000+' },
       { name: 'Backend Modules', value: '11' },
       { name: 'Service Layers', value: '13' },
       { name: 'API Endpoints', value: '30+' },
       { name: 'Frontend Components', value: '50+' },
-      { name: 'AI Models Used', value: '2 (Gemini, Abacus)' },
-      { name: 'External Integrations', value: '4' },
+      { name: 'AI Models', value: '2 (Gemini, Abacus)' },
+      { name: 'Integrations', value: '5+' },
     ],
   },
 ];
