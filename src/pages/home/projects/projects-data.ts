@@ -74,6 +74,8 @@ export const projects: Project[] = [
       'Node.js',
       'Express',
       'MongoDB',
+      'Redis',
+      'BullMQ',
       'Gemini AI',
       'TailwindCSS 4',
     ],
@@ -86,6 +88,7 @@ export const projects: Project[] = [
         'Implemented production-grade 3-layer backend architecture',
         'Built real-time scraping system with GramJS',
         'Integrated dual-provider AI pipeline (Gemini + Abacus)',
+        'Architected async job processing with BullMQ and Redis',
         'Delivered full CI/CD, security, and payment integration',
       ],
     },
@@ -120,7 +123,7 @@ export const projects: Project[] = [
     ],
     architecture: {
       description:
-        'Built a production-grade full-stack platform with a clean 3-layer backend architecture (Controller → Service → Repository) and a highly performant Next.js 15 frontend using Server Components and React Query.',
+        'Built a production-grade full-stack platform with a clean 3-layer backend architecture (Controller → Service → Repository), async job processing with BullMQ and Redis, and a highly performant Next.js 15 frontend using Server Components and React Query.',
       layers: [
         {
           name: 'HTTP Layer (Controllers)',
@@ -173,17 +176,22 @@ export const projects: Project[] = [
         K[Payment Service]
     end
 
+    subgraph "Queue Layer"
+        L[BullMQ]
+        M[Redis Cache]
+    end
+
     subgraph "External Services"
-        L[Telegram GramJS]
-        M[Telegram Bot API]
-        N[Gemini AI]
-        O[Abacus AI]
-        P[LemonSqueezy]
+        N[Telegram GramJS]
+        O[Telegram Bot API]
+        P[Gemini AI]
+        Q[Abacus AI]
+        R[LemonSqueezy]
     end
 
     subgraph "Data Layer"
-        Q[MongoDB Atlas]
-        R[File Storage]
+        S[MongoDB Atlas]
+        T[File Storage]
     end
 
     A --> E
@@ -196,13 +204,17 @@ export const projects: Project[] = [
     F --> J
     F --> K
     H --> L
-    J --> M
-    G --> N
-    I --> O
-    K --> P
-    G --> Q
-    H --> Q
-    I --> R`,
+    J --> L
+    I --> L
+    L --> M
+    H --> N
+    J --> O
+    G --> P
+    I --> Q
+    K --> R
+    G --> S
+    H --> S
+    I --> T`,
       backendDiagram: `flowchart TB
     subgraph HTTP["HTTP Layer (Controllers)"]
         direction LR
@@ -284,6 +296,14 @@ export const projects: Project[] = [
           name: 'MongoDB Atlas',
           purpose: 'Flexible schema with compound indexes',
         },
+        {
+          name: 'Redis',
+          purpose: 'Job queue persistence & worker coordination',
+        },
+        {
+          name: 'BullMQ',
+          purpose: 'Async AI parsing with exponential retry & rate limiting',
+        },
         { name: 'GramJS', purpose: 'Real-time Telegram message listening' },
         { name: 'Gemini + Abacus', purpose: 'Dual-provider AI pipeline' },
         { name: 'Joi + JWT', purpose: 'Validation and stateless auth' },
@@ -308,6 +328,7 @@ export const projects: Project[] = [
         'AI (Gemini + Abacus)',
         'Payments (LemonSqueezy)',
         'Database (MongoDB Atlas)',
+        'Queue & Cache (Redis + BullMQ)',
       ],
     },
     keyFeatures: [
@@ -337,6 +358,11 @@ export const projects: Project[] = [
           'Curated channel bundles ("Tech Starter Pack"), subscription management limits (Free vs Premium), and automated discovery.',
       },
       {
+        title: 'Async Job Processing',
+        description:
+          'Decoupled AI parsing pipeline using BullMQ with Redis: exponential backoff retry, 10 jobs/sec rate limiting, batch enqueuing, and configurable worker concurrency.',
+      },
+      {
         title: 'Real-Time Scraping',
         description:
           'Event-driven architecture using GramJS listeners for instant job detection, coupled with scheduled cleanup jobs.',
@@ -349,6 +375,7 @@ export const projects: Project[] = [
         'Database Optimization (Indexes, TTL, Aggregation)',
         'AI Integration (Prompt engineering, Fallback strategies)',
         'Real-Time Systems (Webhooks, Event listeners)',
+        'Message Queue Architecture (BullMQ, Redis)',
         'Internationalization (i18n Architecture)',
         'Security Implementation (Auth, Validation, Sanitization)',
         'Modern Frontend (SSR, RSC, State Management)',
