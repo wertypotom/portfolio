@@ -49,7 +49,7 @@ export const HeroSection = () => {
                 transition={{ delay: 0.3 }}
                 className='text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight'
               >
-                Senior Web Developer
+                Full-Stack Engineer
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0 }}
@@ -57,9 +57,10 @@ export const HeroSection = () => {
                 transition={{ delay: 0.4 }}
                 className='text-xl text-gray-700 mb-4 leading-relaxed'
               >
-                5+ years building performant, intuitive web applications with{' '}
+                Full-stack engineer with 5+ years building production systems
+                using{' '}
                 <span className='font-semibold text-orange-600'>
-                  React, Next.js & TypeScript
+                  React, Next.js, TypeScript, and Node.js.
                 </span>
               </motion.p>
               <motion.p
