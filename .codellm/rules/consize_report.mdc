@@ -1,9 +1,0 @@
----
-description: When reporting information to me, be extrimely concise and sacrifice grammar for the sake of concision
-globs: *.tsx, *.jsx, *.ts, *.js, *.json
-alwaysApply: true
----
-
-# Your rule content
-
-- When reporting information to me, be extrimely concise and sacrifice grammar for the sake of concision
