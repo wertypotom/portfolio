@@ -1,11 +1,11 @@
-import { useState, useRef, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Play, Pause, SkipBack, SkipForward, X, Music } from 'lucide-react'
+import { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Play, Pause, SkipBack, SkipForward, X, Music } from 'lucide-react';
 
 interface Song {
-  title: string
-  artist: string
-  url: string
+  title: string;
+  artist: string;
+  url: string;
 }
 
 const playlist: Song[] = [
@@ -29,45 +29,55 @@ const playlist: Song[] = [
     artist: 'Boyce Avenue',
     url: '/assets/music/Time After Time - Boyce Avenue.mp3',
   },
-]
+];
 
 export const MusicPlayer: React.FC = () => {
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [currentSongIndex, setCurrentSongIndex] = useState(0)
-  const [isVisible, setIsVisible] = useState(true)
-  const audioRef = useRef<HTMLAudioElement>(null)
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentSongIndex, setCurrentSongIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
-  const currentSong = playlist[currentSongIndex]
+  const currentSong = playlist[currentSongIndex];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     if (audioRef.current) {
       if (isPlaying) {
-        audioRef.current.play()
+        audioRef.current.play();
       } else {
-        audioRef.current.pause()
+        audioRef.current.pause();
       }
     }
-  }, [isPlaying, currentSongIndex])
+  }, [isPlaying, currentSongIndex]);
 
   const togglePlay = () => {
-    setIsPlaying(!isPlaying)
-  }
+    setIsPlaying(!isPlaying);
+  };
 
   const playNext = () => {
-    setCurrentSongIndex((prev) => (prev + 1) % playlist.length)
-    setIsPlaying(true)
-  }
+    setCurrentSongIndex((prev) => (prev + 1) % playlist.length);
+    setIsPlaying(true);
+  };
 
   const playPrevious = () => {
     setCurrentSongIndex(
-      (prev) => (prev - 1 + playlist.length) % playlist.length
-    )
-    setIsPlaying(true)
-  }
+      (prev) => (prev - 1 + playlist.length) % playlist.length,
+    );
+    setIsPlaying(true);
+  };
 
   const handleSongEnd = () => {
-    playNext()
-  }
+    playNext();
+  };
 
   return (
     <>
@@ -76,10 +86,14 @@ export const MusicPlayer: React.FC = () => {
         {isVisible && (
           <motion.div
             initial={{ y: -100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
+            animate={{
+              y: 0,
+              opacity: 1,
+              top: isScrolled ? 110 : 80,
+            }}
             exit={{ y: -100, opacity: 0 }}
-            transition={{ type: 'spring', damping: 20, stiffness: 300 }}
-            className='fixed top-20 left-1/2 -translate-x-1/2 z-40'
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            className='fixed left-1/2 -translate-x-1/2 z-30'
           >
             <div className='flex items-center gap-4 px-6 py-3 bg-white/95 backdrop-blur-md rounded-full shadow-lg border border-gray-200 w-[420px]'>
               {/* Song Info */}
@@ -164,11 +178,15 @@ export const MusicPlayer: React.FC = () => {
         {!isVisible && (
           <motion.button
             initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
+            animate={{
+              scale: 1,
+              opacity: 1,
+              top: isScrolled ? 120 : 96,
+            }}
             exit={{ scale: 0, opacity: 0 }}
-            transition={{ type: 'spring', damping: 15, stiffness: 300 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             onClick={() => setIsVisible(true)}
-            className='fixed top-24 left-6 z-40 p-4 bg-orange-500 text-white rounded-full shadow-lg hover:bg-orange-600 transition-all hover:scale-110 group'
+            className='fixed left-6 z-30 p-4 bg-orange-500 text-white rounded-full shadow-lg hover:bg-orange-600 transition-all hover:scale-110 group'
             aria-label='Open music player'
           >
             <div className='relative'>
@@ -198,5 +216,5 @@ export const MusicPlayer: React.FC = () => {
         preload='metadata'
       />
     </>
-  )
-}
+  );
+};

@@ -94,7 +94,7 @@ const skillCategories: SkillCategory[] = [
 
 const Home: React.FC = () => {
   const [selectedSkill, setSelectedSkill] = useState<SkillCategory | null>(
-    null
+    null,
   );
   const [skillSearch, setSkillSearch] = useState('');
   const [selectedSkillItem, setSelectedSkillItem] = useState('');
@@ -273,7 +273,7 @@ const Home: React.FC = () => {
                     {React.createElement(selectedSkill.icon, {
                       className: `${selectedSkill.color.replace(
                         'bg-',
-                        'text-'
+                        'text-',
                       )}`,
                       size: 40,
                     })}

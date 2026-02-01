@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X, MessageCircleMore } from 'lucide-react';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
+import { MagneticButton } from '../smoothui/magnetic-button';
 
 const navItems = [
   { name: 'Home', path: '#hero' },
@@ -40,17 +41,39 @@ const Header: React.FC = () => {
 
   return (
     <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-lg' : 'bg-white/95 backdrop-blur-sm'
+      initial={{ y: -100, width: '100%', borderRadius: '0px', top: 0 }}
+      animate={{
+        y: 0,
+        marginTop: isScrolled ? 16 : 0,
+        width: isScrolled ? '95%' : '100%',
+        borderRadius: isScrolled ? '9999px' : '0px',
+        top: isScrolled ? 16 : 0,
+      }}
+      transition={{
+        type: 'spring',
+        stiffness: 300,
+        damping: 30,
+        width: { duration: 0.5, ease: [0.4, 0, 0.2, 1] },
+        borderRadius: { duration: 0.5, ease: [0.4, 0, 0.2, 1] },
+        top: { duration: 0.5, ease: [0.4, 0, 0.2, 1] },
+      }}
+      className={`fixed left-1/2 -translate-x-1/2 z-50 ${
+        isScrolled
+          ? 'max-w-6xl bg-white/60 backdrop-blur-lg shadow-xl border border-gray-200/50'
+          : 'bg-white/95 backdrop-blur-sm shadow-md'
       }`}
+      style={{
+        transition: 'background-color 0.5s ease, box-shadow 0.5s ease',
+      }}
     >
-      <div className='container mx-auto px-4 py-4 flex items-center justify-between'>
+      <div
+        className={`mx-auto px-4 flex items-center justify-between transition-all duration-300 ${
+          isScrolled ? 'py-3' : 'py-4'
+        }`}
+      >
         <AnchorLink
           href='#hero'
-          className='text-2xl font-semibold text-gray-800 -ml-6'
+          className='text-2xl font-semibold text-gray-800'
         >
           <img src='/assets/images/logo-me.png' alt='Andrey' className='h-9' />
         </AnchorLink>
@@ -82,14 +105,20 @@ const Header: React.FC = () => {
           ))}
         </nav>
 
-        <Link
-          to={`mailto:andrey.povstyanko.00@gmail.com?subject=🤘 Hi Andrey, I'd like to hire you`}
+        <MagneticButton
+          asChild
+          strength={0.3}
+          radius={150}
           className='hidden md:flex items-center gap-2 bg-orange-500 text-white px-6 py-2 rounded-full hover:bg-orange-600 transition-all duration-200 hover:scale-105'
-          target='_blank'
         >
-          <MessageCircleMore size={20} className='text-white' />
-          Hire me
-        </Link>
+          <Link
+            to={`mailto:andrey.povstyanko.00@gmail.com?subject=🤘 Hi Andrey, I'd like to hire you`}
+            target='_blank'
+          >
+            <MessageCircleMore size={20} className='text-white' />
+            Hire me
+          </Link>
+        </MagneticButton>
 
         {/* Mobile Menu Button */}
         <button
