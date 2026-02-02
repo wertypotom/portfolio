@@ -17,6 +17,17 @@ const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('#hero');
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768); // 768px is md breakpoint
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,7 +57,8 @@ const Header: React.FC = () => {
         y: 0,
         marginTop: isScrolled ? 16 : 0,
         width: isScrolled ? '95%' : '100%',
-        borderRadius: isScrolled ? '9999px' : '0px',
+        borderRadius:
+          isScrolled && !(isMobile && isMobileMenuOpen) ? '9999px' : '0px',
         top: isScrolled ? 16 : 0,
       }}
       transition={{
@@ -54,12 +66,12 @@ const Header: React.FC = () => {
         stiffness: 300,
         damping: 30,
         width: { duration: 0.5, ease: [0.4, 0, 0.2, 1] },
-        borderRadius: { duration: 0.5, ease: [0.4, 0, 0.2, 1] },
+        borderRadius: { duration: isMobile ? 0 : 0.5, ease: [0.4, 0, 0.2, 1] },
         top: { duration: 0.5, ease: [0.4, 0, 0.2, 1] },
       }}
       className={`fixed left-1/2 -translate-x-1/2 z-50 ${
         isScrolled
-          ? 'max-w-6xl bg-white/60 backdrop-blur-lg shadow-xl border border-gray-200/50'
+          ? `max-w-6xl ${isMobile && isMobileMenuOpen ? 'bg-white' : 'bg-white/60'} backdrop-blur-lg shadow-xl border border-gray-200/50`
           : 'bg-white/95 backdrop-blur-sm shadow-md'
       }`}
       style={{
@@ -138,7 +150,7 @@ const Header: React.FC = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className='md:hidden bg-white border-t shadow-lg'
+            className='md:hidden bg-white border-t border-t-gray-200/50'
           >
             <nav className='container mx-auto px-4 py-4 flex flex-col space-y-4'>
               {navItems.map((item) => (

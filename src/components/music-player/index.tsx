@@ -95,19 +95,19 @@ export const MusicPlayer: React.FC = () => {
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             className='fixed left-1/2 -translate-x-1/2 z-30'
           >
-            <div className='flex items-center gap-4 px-6 py-3 bg-white/95 backdrop-blur-md rounded-full shadow-lg border border-gray-200 w-[420px]'>
+            <div className='flex items-center gap-2 md:gap-4 px-3 md:px-6 py-2 md:py-3 bg-white/95 backdrop-blur-md rounded-full shadow-lg border border-gray-200 w-[340px] md:w-[420px]'>
               {/* Song Info */}
-              <div className='flex items-center gap-3 flex-1 min-w-0'>
+              <div className='flex items-center gap-2 md:gap-3 flex-1 min-w-0'>
                 {/* Sound Animation */}
-                <div className='flex items-center gap-0.5 h-6 flex-shrink-0'>
+                <div className='flex items-center gap-0.5 h-4 md:h-6 flex-shrink-0'>
                   {[...Array(4)].map((_, i) => (
                     <motion.div
                       key={i}
-                      className='w-1 bg-orange-500 rounded-full'
+                      className='w-0.5 md:w-1 bg-orange-500 rounded-full'
                       animate={{
                         height: isPlaying
-                          ? ['8px', '24px', '12px', '24px']
-                          : '8px',
+                          ? ['6px', '16px', '10px', '16px']
+                          : '6px',
                       }}
                       transition={{
                         duration: 0.8,
@@ -120,53 +120,56 @@ export const MusicPlayer: React.FC = () => {
                 </div>
 
                 <div className='text-left min-w-0 flex-1'>
-                  <p className='text-sm font-semibold text-gray-900 truncate'>
+                  <p className='text-xs md:text-sm font-semibold text-gray-900 truncate'>
                     {currentSong.title}
                   </p>
-                  <p className='text-xs text-gray-500 truncate'>
+                  <p className='text-[10px] md:text-xs text-gray-500 truncate'>
                     {currentSong.artist}
                   </p>
                 </div>
               </div>
 
               {/* Controls */}
-              <div className='flex items-center gap-2 flex-shrink-0'>
+              <div className='flex items-center gap-1 md:gap-2 flex-shrink-0'>
                 <button
                   onClick={playPrevious}
-                  className='p-2 text-gray-700 hover:text-orange-500 transition-colors rounded-full hover:bg-orange-50'
+                  className='p-1 md:p-2 text-gray-700 hover:text-orange-500 transition-colors rounded-full hover:bg-orange-50'
                   aria-label='Previous song'
                 >
-                  <SkipBack size={18} />
+                  <SkipBack size={16} className='md:w-[18px] md:h-[18px]' />
                 </button>
 
                 <button
                   onClick={togglePlay}
-                  className='p-2.5 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-all hover:scale-110 shadow-md'
+                  className='p-1.5 md:p-2.5 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-all hover:scale-110 shadow-md'
                   aria-label={isPlaying ? 'Pause' : 'Play'}
                 >
                   {isPlaying ? (
-                    <Pause size={18} />
+                    <Pause size={16} className='md:w-[18px] md:h-[18px]' />
                   ) : (
-                    <Play size={18} className='ml-0.5' />
+                    <Play
+                      size={16}
+                      className='ml-0.5 md:w-[18px] md:h-[18px]'
+                    />
                   )}
                 </button>
 
                 <button
                   onClick={playNext}
-                  className='p-2 text-gray-700 hover:text-orange-500 transition-colors rounded-full hover:bg-orange-50'
+                  className='p-1 md:p-2 text-gray-700 hover:text-orange-500 transition-colors rounded-full hover:bg-orange-50'
                   aria-label='Next song'
                 >
-                  <SkipForward size={18} />
+                  <SkipForward size={16} className='md:w-[18px] md:h-[18px]' />
                 </button>
               </div>
 
               {/* Close Button */}
               <button
                 onClick={() => setIsVisible(false)}
-                className='p-2 text-gray-500 hover:text-gray-700 transition-colors rounded-full hover:bg-gray-100 flex-shrink-0'
+                className='p-1 md:p-2 text-gray-500 hover:text-gray-700 transition-colors rounded-full hover:bg-gray-100 flex-shrink-0'
                 aria-label='Close player'
               >
-                <X size={18} />
+                <X size={16} className='md:w-[18px] md:h-[18px]' />
               </button>
             </div>
           </motion.div>
