@@ -85,13 +85,13 @@ export const HeroSection = () => {
                   Let's Work Together
                   <ArrowRight className='ml-2' size={20} />
                 </Link>
-                <a
+                {/* <a
                   href='/assets/resume.pdf'
                   onClick={handleViewResume}
                   className='inline-flex items-center bg-white text-gray-800 px-8 py-3 rounded-full border-2 border-gray-300 hover:border-orange-500 hover:text-orange-600 transition-all hover:scale-105'
                 >
                   View Resume
-                </a>
+                </a> */}
               </motion.div>
             </motion.div>
 
