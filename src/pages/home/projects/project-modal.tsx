@@ -91,37 +91,34 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               </div>
             </section>
 
-            {/* AI Team Roles (The Achievement) */}
-            {project.teamRoles && (
+            {/* Development Approach */}
+            {project.developmentApproach && (
               <section>
                 <div className='flex items-center gap-3 mb-6'>
                   <h3 className='text-2xl font-bold text-gray-900'>
-                    The AI Team
+                    {project.developmentApproach.title}
                   </h3>
-                  <span className='px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-bold uppercase tracking-wide'>
-                    Orchestrated
+                  <span className='px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold uppercase tracking-wide'>
+                    Solo Development
                   </span>
                 </div>
-                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'>
-                  {project.teamRoles.map((role, idx) => (
-                    <div
-                      key={idx}
-                      className='bg-white border border-gray-200 p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group'
-                    >
-                      <div className='absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity'>
-                        {role.agent.includes('Claude') ? '🧠' : '✨'}
-                      </div>
-                      <div className='font-bold text-gray-900 mb-1'>
-                        {role.role}
-                      </div>
-                      <div className='text-sm font-semibold text-purple-600 mb-2'>
-                        {role.agent}
-                      </div>
-                      <div className='text-xs text-gray-500 leading-snug'>
-                        {role.focus}
-                      </div>
-                    </div>
-                  ))}
+                <div className='bg-gradient-to-br from-blue-50 to-white p-6 rounded-xl border border-blue-200'>
+                  <p className='text-gray-700 mb-4 font-medium'>
+                    {project.developmentApproach.description}
+                  </p>
+                  <ul className='space-y-3'>
+                    {project.developmentApproach.keyPoints.map((point, idx) => (
+                      <li
+                        key={idx}
+                        className='flex items-start gap-3 text-gray-700'
+                      >
+                        <span className='text-blue-500 mt-1 font-bold text-lg'>
+                          ✓
+                        </span>
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </section>
             )}
@@ -345,7 +342,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                             >
                               {integration}
                             </span>
-                          )
+                          ),
                         )}
                       </div>
                     </div>

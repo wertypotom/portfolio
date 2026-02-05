@@ -14,11 +14,11 @@ export interface Project {
     timeline: string;
     keyCapabilities: string[];
   };
-  teamRoles?: {
-    role: string;
-    agent: string;
-    focus: string;
-  }[];
+  developmentApproach?: {
+    title: string;
+    description: string;
+    keyPoints: string[];
+  };
   architecture: {
     description: string;
     layers: {
@@ -64,7 +64,8 @@ export const projects: Project[] = [
   {
     id: 'jobsniper',
     title: 'JobSniper',
-    subtitle: 'AI-Powered Job Aggregation Platform | 3-Week Build',
+    subtitle:
+      'Full-Stack Job Aggregation Platform | Built in 3 Weeks with AI-Assisted Development',
     coverImage: '/assets/images/jobsniper-cover.png',
     link: 'https://www.jobsniper.work',
     techStack: [
@@ -84,7 +85,7 @@ export const projects: Project[] = [
         'Job seekers waste hours browsing Telegram channels, manually filtering jobs, and tailoring resumes. JobSniper solves this with a centralized platform that scrapes Telegram channels in real-time, parses jobs with AI into structured data, filters via advanced multi-dimensional search, generates AI-tailored resumes (PDF/DOCX), and sends smart Telegram notifications.',
       timeline: '3 weeks (November 29 - December 20, 2025)',
       keyCapabilities: [
-        'Orchestrated 7 specialized AI agents for rapid development',
+        'Architected production-grade full-stack platform with AI-assisted rapid development',
         'Implemented production-grade 3-layer backend architecture',
         'Built real-time scraping system with GramJS',
         'Integrated dual-provider AI pipeline (Gemini + Abacus)',
@@ -92,35 +93,18 @@ export const projects: Project[] = [
         'Delivered full CI/CD, security, and payment integration',
       ],
     },
-    teamRoles: [
-      {
-        role: 'Team Lead',
-        agent: 'Claude',
-        focus: 'Architecture, reviews, planning',
-      },
-      {
-        role: 'Backend Dev',
-        agent: 'Claude',
-        focus: 'Express APIs, MongoDB queries',
-      },
-      {
-        role: 'Frontend Dev',
-        agent: 'Claude',
-        focus: 'Next.js, React components',
-      },
-      { role: 'DevOps', agent: 'Claude', focus: 'Deployment, migrations' },
-      {
-        role: 'Product Analyst',
-        agent: 'Gemini',
-        focus: 'User flows, edge cases',
-      },
-      {
-        role: 'Architect',
-        agent: 'Gemini',
-        focus: 'System design, data models',
-      },
-      { role: 'QA', agent: 'Claude', focus: 'Validation, security reviews' },
-    ],
+    developmentApproach: {
+      title: 'Engineering Approach',
+      description:
+        'Solo full-stack development leveraging AI tools for accelerated delivery',
+      keyPoints: [
+        'Designed complete system architecture (3-layer backend, async job processing, dual-AI pipeline)',
+        'Made all technical decisions (database schema, API contracts, state management)',
+        'Implemented critical business logic (job filtering algorithms, notification deduplication)',
+        'Used Claude & Gemini as coding assistants for implementation speed and code review',
+        'Enforced strict code quality standards (TypeScript strict mode, ESLint, testing)',
+      ],
+    },
     architecture: {
       description:
         'Built a production-grade full-stack platform with a clean 3-layer backend architecture (Controller → Service → Repository), async job processing with BullMQ and Redis, and a highly performant Next.js 15 frontend using Server Components and React Query.',
@@ -242,13 +226,13 @@ export const projects: Project[] = [
     },
     developmentMethodology: [
       {
-        title: 'Strategic AI Delegation',
+        title: 'AI-Assisted Engineering Workflow',
         description:
-          'Instead of generic "write this" prompts, I orchestrated AI as specialized team members:',
+          'Leveraged AI coding assistants (Claude, Gemini) strategically to accelerate development while maintaining full engineering ownership:',
         items: [
-          '"Claude (Team Lead): Design 3-layer architecture with path aliases"',
-          '"Gemini (Product): Analyze user flow for channel onboarding"',
-          '"Claude (Backend): Implement job filtering with MongoDB compound indexes"',
+          'Designed 3-layer architecture, used Claude to implement boilerplate with type safety',
+          'Analyzed user flows and edge cases, used Gemini for validation and suggestions',
+          'Architected job filtering with compound indexes, used Claude for query optimization',
         ],
       },
       {
@@ -382,9 +366,9 @@ export const projects: Project[] = [
         'DevOps (CI/CD, Docker, Environment Config)',
       ],
       soft: [
-        'Strategic AI Orchestration (Team Lead role)',
-        'Product Thinking (User Experience, Monetization)',
+        'AI Tool Integration (Leveraging LLMs for productivity)',
         'System Design (Scalability, Modularity)',
+        'Product Thinking (User Experience, Monetization)',
         'Rapid Prototyping (3-week delivery)',
         'Quality Focus (Documentation, Testing)',
       ],
