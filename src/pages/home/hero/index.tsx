@@ -7,10 +7,10 @@ import { Modal } from '../../../components/modal';
 export const HeroSection = () => {
   const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
 
-  const handleViewResume = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    setIsPdfModalOpen(true);
-  };
+  // const handleViewResume = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  //   e.preventDefault();
+  //   setIsPdfModalOpen(true);
+  // };
 
   return (
     <>
