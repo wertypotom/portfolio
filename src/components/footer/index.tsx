@@ -1,27 +1,49 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import { Linkedin, Github, Phone, Mail } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Linkedin, Github, Phone, Mail } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { FaTelegram, FaWhatsapp } from 'react-icons/fa';
+import config from '../../config';
 
 const Footer: React.FC = () => {
   const socialLinks = [
     {
       icon: Phone,
-      href: 'tel:+14143242521',
+      href: `tel:${config.phoneNumber}`,
     },
     {
       icon: Mail,
       href: `mailto:andrey.povstyanko.00@gmail.com?subject=🤘 Hi Andrey, I'd like to hire you`,
     },
+    ...(config.showWhatsApp
+      ? [
+          {
+            icon: FaWhatsapp,
+            href: `https://wa.me/${config.phoneNumber.replace(/\+/g, '')}`,
+          },
+        ]
+      : []),
+    ...(config.showTelegram
+      ? [
+          {
+            icon: FaTelegram,
+            href: `https://t.me/${config.telegramUsername}`,
+          },
+        ]
+      : []),
     {
       icon: Github,
       href: 'https://github.com/wertypotom',
     },
-    {
-      icon: Linkedin,
-      href: 'https://www.linkedin.com/in/andrey-povstyanko/',
-    },
-  ]
+    ...(config.showLinkedIn
+      ? [
+          {
+            icon: Linkedin,
+            href: 'https://www.linkedin.com/in/andrey-povstyanko/',
+          },
+        ]
+      : []),
+  ];
 
   return (
     <footer
@@ -61,7 +83,7 @@ const Footer: React.FC = () => {
         </motion.ul>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

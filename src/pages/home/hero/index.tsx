@@ -3,6 +3,7 @@ import { ArrowRight, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { Modal } from '../../../components/modal';
+import config from '../../../config';
 
 export const HeroSection = () => {
   const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
@@ -69,7 +70,7 @@ export const HeroSection = () => {
                 transition={{ delay: 0.45 }}
                 className='text-lg text-gray-600 mb-8'
               >
-                📍 Milwaukee, WI • Open to relocation across the US
+                {config.locationText}
               </motion.p>
               <motion.div
                 initial={{ opacity: 0 }}
