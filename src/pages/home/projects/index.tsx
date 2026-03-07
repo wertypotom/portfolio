@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import useEmblaCarousel from 'embla-carousel-react';
+import AutoScroll from 'embla-carousel-auto-scroll';
 import { Modal } from '../../../components/modal';
 import { ProjectCard } from './project-card';
 import { ProjectModal } from './project-modal';
@@ -8,6 +10,12 @@ import type { Project } from './projects-data';
 
 export const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [autoScrollPlugin] = useState(() => AutoScroll({ speed: 1, playOnInit: true, stopOnInteraction: false }));
+
+  const [emblaRef] = useEmblaCarousel(
+    { loop: true, align: 'center', dragFree: true },
+    [autoScrollPlugin]
+  );
 
   return (
     <>
@@ -15,7 +23,7 @@ export const Projects = () => {
         id='projects'
         className='py-10 sm:py-16 md:py-20 px-4 bg-white overflow-hidden'
       >
-        <div className='container mx-auto'>
+        <div className='container mx-auto max-w-[100vw]'>
           <motion.div
             initial={{ opacity: 0, scaleX: 0 }}
             whileInView={{ opacity: 1, scaleX: 1 }}
@@ -48,16 +56,24 @@ export const Projects = () => {
             integration.
           </motion.p>
 
-          {/* Projects Grid */}
-          <div className='grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-6xl mx-auto'>
-            {projects.map((project, index) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                index={index}
-                onClick={() => setSelectedProject(project)}
-              />
-            ))}
+          {/* Projects Carousel */}
+          <div 
+            className='overflow-hidden w-full mx-auto pt-4 pb-12 cursor-grab active:cursor-grabbing [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]' 
+            ref={emblaRef}
+          >
+            <div className='flex -ml-6 items-stretch'>
+              {[...projects, ...projects].map((project, index) => (
+                <div key={`${project.id}-${index}`} className='flex-[0_0_85vw] sm:flex-[0_0_400px] md:flex-[0_0_450px] lg:flex-[0_0_500px] xl:flex-[0_0_550px] min-w-0 pl-6'>
+                  <div className='h-full flex px-2 py-4'>
+                    <ProjectCard
+                      project={project}
+                      index={index}
+                      onClick={() => setSelectedProject(project)}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
