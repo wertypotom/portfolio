@@ -24,10 +24,21 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       {/* Cover Image */}
       <div className='relative h-64 bg-gradient-to-br from-orange-100 to-orange-200 overflow-hidden'>
         <img
-          src={project.coverImage}
+          src={project.coverImage ? project.coverImage : '/placeholder.png'}
           alt={project.title}
           className='w-full h-full object-cover'
+          onError={(e) => {
+            // Revert to a gradient fallback if image fails to load (e.g., missing file)
+            (e.target as HTMLImageElement).src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPgo8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjdjZWJiIi8+Cjwvc3ZnPg==';
+          }}
         />
+        {project.badge && (
+          <div className='absolute top-4 right-4 z-10'>
+            <span className='px-3 py-1 bg-gradient-to-r from-orange-500 to-amber-500 text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-lg backdrop-blur-sm'>
+              {project.badge}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Content */}
@@ -39,7 +50,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
         {/* Tech Stack Tags */}
         <div className='flex flex-wrap gap-2 mb-4'>
-          {project.techStack.slice(0, 5).map((tech, idx) => (
+          {project.tags.slice(0, 5).map((tech, idx) => (
             <span
               key={idx}
               className='px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium'
@@ -47,15 +58,15 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               {tech}
             </span>
           ))}
-          {project.techStack.length > 5 && (
+          {project.tags.length > 5 && (
             <span className='px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm font-medium'>
-              +{project.techStack.length - 5} more
+              +{project.tags.length - 5} more
             </span>
           )}
         </div>
 
         <p className='text-gray-600 line-clamp-3'>
-          {project.overview.description}
+          {project.overviewText}
         </p>
 
         <div className='mt-4 text-orange-600 font-semibold flex items-center gap-2 group-hover:gap-3 transition-all'>

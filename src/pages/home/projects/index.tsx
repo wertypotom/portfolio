@@ -49,17 +49,15 @@ export const Projects = () => {
           </motion.p>
 
           {/* Projects Grid */}
-          <div className='flex justify-center max-w-7xl mx-auto'>
-            <div className='w-full max-w-md'>
-              {projects.map((project, index) => (
-                <ProjectCard
-                  key={project.id}
-                  project={project}
-                  index={index}
-                  onClick={() => setSelectedProject(project)}
-                />
-              ))}
-            </div>
+          <div className='grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-6xl mx-auto'>
+            {projects.map((project, index) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={index}
+                onClick={() => setSelectedProject(project)}
+              />
+            ))}
           </div>
         </div>
       </section>

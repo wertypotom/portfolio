@@ -67,6 +67,7 @@ export const SkillsOrbitContainer: React.FC<SkillsOrbitContainerProps> = ({
 
             return (
               <SkillOrbitIcon
+                key={skill.name}
                 skill={skill}
                 angle={angle}
                 config={config}
