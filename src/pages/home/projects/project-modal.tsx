@@ -1,5 +1,6 @@
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { X, ExternalLink } from 'lucide-react';
+import { X, ExternalLink, ChevronDown } from 'lucide-react';
 import { MermaidDiagram } from '../../../components/mermaid-diagram';
 import type { Project, ProjectSection } from './types';
 
@@ -243,6 +244,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   project,
   onClose,
 }) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -278,30 +281,59 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 href={project.link}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors text-sm font-medium flex items-center gap-2'
+                className='px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 shadow-sm transition-all duration-200 text-sm font-medium flex items-center gap-2 hover:-translate-y-0.5'
               >
                 Visit Site
                 <ExternalLink size={16} />
               </a>
             ) : null}
-            {project.githubLinks && project.githubLinks.length > 0 && (
-              <select
-                className='px-3 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors text-sm font-medium cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-400'
-                onChange={(e) => {
-                  if (e.target.value) {
-                    window.open(e.target.value, '_blank', 'noopener,noreferrer');
-                    e.target.value = '';
-                  }
-                }}
-                defaultValue=""
+
+            {project.githubLinks && project.githubLinks.length === 1 && (
+              <a
+                href={project.githubLinks[0].url}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='px-4 py-2 bg-white text-gray-700 border border-gray-200 rounded-lg hover:bg-gray-50 shadow-sm transition-all duration-200 text-sm font-medium flex items-center gap-2 hover:-translate-y-0.5'
               >
-                <option value="" disabled>View Code</option>
-                {project.githubLinks.map((link, idx) => (
-                  <option key={idx} value={link.url} className='bg-white text-gray-900'>
-                    {link.label}
-                  </option>
-                ))}
-              </select>
+                {project.githubLinks[0].label || 'View Code'}
+                <ExternalLink size={16} />
+              </a>
+            )}
+
+            {project.githubLinks && project.githubLinks.length > 1 && (
+              <div className="relative">
+                <button
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  className={`px-4 py-2 bg-white text-gray-700 border ${isDropdownOpen ? 'border-orange-300 ring-4 ring-orange-50' : 'border-gray-200'} rounded-lg hover:bg-gray-50 shadow-sm transition-all duration-200 text-sm font-medium flex items-center gap-2 hover:-translate-y-0.5`}
+                >
+                  View Code
+                  <ChevronDown size={16} className={`transition-transform duration-200 ${isDropdownOpen ? 'rotate-180 text-orange-500' : 'text-gray-400'}`} />
+                </button>
+                
+                {isDropdownOpen && (
+                  <>
+                    <div 
+                      className="fixed inset-0 z-40" 
+                      onClick={() => setIsDropdownOpen(false)}
+                      aria-label="Close dropdown overlay"
+                    />
+                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-50 animate-in fade-in zoom-in duration-200 origin-top-right">
+                      {project.githubLinks.map((link, idx) => (
+                        <a 
+                          key={idx} 
+                          href={link.url}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                          className='block px-4 py-3 text-sm text-gray-700 font-medium hover:bg-orange-50 hover:text-orange-600 transition-colors border-b border-gray-50 last:border-b-0'
+                          onClick={() => setIsDropdownOpen(false)}
+                        >
+                          {link.label}
+                        </a>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
             )}
             <button
               onClick={onClose}
