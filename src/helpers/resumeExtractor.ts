@@ -22,7 +22,7 @@ Senior Frontend Engineer with 5 years of experience building scalable web applic
 
 PROFESSIONAL EXPERIENCE:
 
-BRAINEX
+M-Files
 Client: M-Files, a Finnish tech company providing innovative information management software that utilizes metadata for efficient data organization and automation
 Jan 2023 – Jan 2025, Kazakhstan — Remote
 	

@@ -17,7 +17,7 @@ const experiences: Experience[] = [
   {
     period: '2023 - 2025',
     title: 'Full Stack Developer',
-    company: 'BRAINEX',
+    company: 'M-Files',
     type: 'Full-time',
     location: 'Remote, Kazakhstan',
     description:
